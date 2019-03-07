@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <!-- bootstrap-select插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <!-- bootstrap-table插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                
+                <div class="ibox-content">
+                    <div class="echarts" id="echarts1" style="height: 700px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/content.js"></script>
+<!-- bootstrap-select插件 -->
+<script src="js/bootstrap-select.js"></script>
+<!-- bootstrap-table插件	 -->
+<script src="js/bootstrap-table.min.js"></script>
+<script>
+    var echarts1 = document.getElementById('echarts1');
+    // 初始化
+    var myChart1 = echarts.init(echarts1);
+    var data1=[
+        {
+            name:'一',
+            data:-0.07,
+            state:1,
+        },
+        {
+            name:'二',
+            data:-0.09,
+            state:2,
+        },
+        {
+            name:'三',
+            data:0.2,
+            state:3,
+        },
+        {
+            name:'四',
+            data:0.44,
+            state:4,
+        },
+        {
+            name:'五',
+            data:-0.23,
+            state:5,
+        },
+        {
+            name:'六',
+            data:0.08,
+            state:6,
+        },
+        {
+            name:'七',
+            data:-0.17,
+            state:1,
+        },
+        {
+            name:'八',
+            data:0.47,
+            state:2,
+        },
+        {
+            name:'九',
+            data:-0.36,
+            state:3,
+        },
+        {
+            name:'十',
+            data:0.18,
+            state:4,
+        },
+    ];
+    // 设置参数配置
+    var option1={
+        title:{
+            text:'正负交错图表'
+        },
+        tooltip:{},
+        legend:{
+
+        },
+        grid:{
+            // containLabel: true
+        },
+        xAxis:{
+            // type:'category'
+            position:'top',
+            min:-0.5,
+            max:0.7
+
+        },
+        yAxis:{
+            type:'category'
+        },
+        visualMap:{
+            orient: 'horizontal',
+            left: 'center',
+            min:1,
+            max:6,
+            text:['高','低'],
+            dimension: 2,
+            inRange: {
+                color: ['#D7DA8B', '#E15457']
+            }
+        },
+        dataset:{
+            dimensions:['name','data','state'],
+            source:[
+                {
+                    name:'一',
+                    data:-0.07,
+                    state:6,
+                },
+                {
+                    name:'二',
+                    data:-0.09,
+                    state:2,
+                },
+                {
+                    name:'三',
+                    data:0.2,
+                    state:3,
+                },
+                {
+                    name:'四',
+                    data:0.44,
+                    state:4,
+                },
+                {
+                    name:'五',
+                    data:-0.23,
+                    state:5,
+                },
+                {
+                    name:'六',
+                    data:0.08,
+                    state:6,
+                },
+                {
+                    name:'七',
+                    data:-0.17,
+                    state:1,
+                },
+                {
+                    name:'八',
+                    data:0.47,
+                    state:2,
+                },
+                {
+                    name:'九',
+                    data:-0.36,
+                    state:3,
+                },
+                {
+                    name:'十',
+                    data:0.18,
+                    state:6,
+                }
+            ]
+        },
+        series:[
+            // 第一组数据的表的信息
+            {
+                name:'误差值',
+                type:'bar',
+                label:{
+                    normal:{
+                        show:true,
+                        formatter: '{b}'
+                    }
+                },
+                // data:[-0.07,-0.09,0.2,0.44,-0.23,0.08,-0.17,0.47,-0.36,0.18],
+                /*data:(function(par){
+                    // console.log(par);
+                    // 对数组做一个处理
+                    return data1.map(function (value,index) {
+                        return value.data;
+                    });
+                })(),*/
+                // data:data1,
+                itemStyle:{
+                    /*normal:{
+                        // color:'#1acd7e'
+                        color:function (par) {
+                            // console.log(par);
+                            // console.log(par.data.state);
+                            switch (par.data.state) {
+                                case 1:return '#ccc';
+                                    break;
+                                case 2:return '#ddd';
+                                    break;
+                                case 3:return '#eee';
+                                    break;
+                                case 4:return '#1acd7e';
+                                    break;
+                                case 5:return 'green';
+                                    break;
+                                case 6:return 'red';
+                                    break;
+                            }
+                        }
+                    }*/
+                }
+            },
+            // 第二组数据的表的信息
+            /*{
+                name:'状态',
+                type:'bar',
+                itemStyle:{
+                    normal:{
+                        color:'red'
+                    }
+                }
+            }*/
+        ]
+
+    };
+    // 显示图表
+    myChart1.setOption(option1);
+</script>
+</html>

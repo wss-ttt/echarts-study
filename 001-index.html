@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <!-- bootstrap-select插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <!-- bootstrap-table插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <!--1:实时更新图-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        1 实时更新图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--2:折线图-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        2 折线图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--3:柱状图-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        3 柱状图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--4:饼状图-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        4 饼状图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--5:绑定多组数据(没有悬浮提示)-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        5 绑定多组数据(没有悬浮提示)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain5">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--6:绑定多组数据(有悬浮提示)-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        6 绑定多组数据(没有悬浮提示)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain6">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--7:绑定多组数据(有悬浮提示+图例说明)-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        7 绑定多组数据(没有悬浮提示)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain7">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--8:2个y轴-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        8 2个y轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain8">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--9:折柱混合+2个个y轴-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        9 折柱混合+2个y轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain9">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--10:折柱混合+多个y轴-->
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        10 折柱混合+多个y轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain10">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--11:x轴是时间轴-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        11 时间坐标轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain11">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--12:动态数据-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        12 动态数据
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain12">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--13:点击按钮显示图表-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        13 点击按钮显示删除图表
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <button class="btn btn-danger" id="addBtn">添加</button>
+                        <button class="btn btn-success" id="clearBtn">清空图表</button>
+                        <button class="btn btn-primary" id="delBtn">删除</button>
+                    </div>
+                    <div class="echarts" id="chartmain13">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--14:下拉框动态显示图标表(单选)-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        14 下拉框动态显示图表(单选)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 search-collapse">
+                            <form id="role-form">
+                                <div class="select-list">
+                                    <ul>
+                                        <li>
+                                            课程设置：<select class="" name="status" id="sel1">
+                                            <option value="0">数学</option>
+                                            <option value="1">语文</option>
+                                            <option value="2">英语</option>
+                                        </select>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="echarts" id="chartmain14">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--15:下拉框动态显示图标表(多选)-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        15 下拉框动态显示图表(多选)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 search-collapse">
+                            <form id="role-form2">
+                                <div class="select-list">
+                                    <ul>
+                                        <li>
+                                            课程设置：<select class="selectpicker" multiple name="status" id="sel2">
+                                            <option value="0" selected>数学</option>
+                                            <option value="1">语文</option>
+                                            <option value="2">英语</option>
+                                        </select>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="echarts" id="chartmain15">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--16:横向柱状图-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        16 横向柱状图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain16">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--17:双x轴-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        17 双x轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain17">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--18:table数据显示-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        18 table数据显示
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table" data-toggle="table" data-url="/test/table_base.json" data-height="250" data-mobile-responsive="true">
+                        <thead>
+                        <tr>
+                            <th data-field="Tid">ID</th>
+                            <th data-field="First">姓名</th>
+                            <th data-field="sex">性别</th>
+                            <th data-field="Score">评分</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--19:dataset的使用-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        19 dataset的使用
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain19">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--20:不同角度展示数据-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        20 不同角度展示数据
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain20" style="height:600px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--21:散点图-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        21 散点图
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain21" style="height:600px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--22:事件处理-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        22 事件处理
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain22" style="height:600px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--23:颜色动态赋值-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        23 颜色动态赋值
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain23" style="height:600px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--24:2个y轴的颜色交叉处理-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        24 2个y轴的颜色交叉处理
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain24">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--25:legend分页处理-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        25 legend分页处理
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain25">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--26:柱状图柱子颜色渐变-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        26 柱状图柱子颜色渐变
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain26">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--27:给柱子添加单击事件(单系列)-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        26 给柱子添加单击事件(单系列)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain27">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--28:给柱子添加单击事件(多系列)-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        28 给柱子添加单击事件(多系列)
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain28">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--29:超过预警值，柱子颜色变化-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        28 超过预警值，柱子颜色变化
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain29">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--30:交错正负轴-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        30 交错正负轴
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up">
+                            </i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="chartmain30">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/content.js"></script>
+<!-- bootstrap-select插件 -->
+<script src="js/bootstrap-select.js"></script>
+<!-- bootstrap-table插件	 -->
+<script src="js/bootstrap-table.min.js"></script>
+<script>
+
+
+    // 1:实时更新图
+    var myChart = echarts.init(document.getElementById('chartmain'));
+    var base = + new Date(2017,3,8);
+    var oneDay = 24*3600*1000;
+    var date = [];
+    var data = [Math.random()*150];
+    var now = new Date(base);
+    var day = 30;
+    function addData(shift){
+        now = [now.getFullYear(),now.getMonth()+1,now.getDate()].join('/');
+        date.push(now);
+        data.push((Math.random()-0.5)*10+data[data.length-1]);
+        if (shift) {
+            // console.log(data);
+            date.shift();
+            data.shift();
+        }
+        now = new Date(+new Date(now)+oneDay);
+    }
+
+    for (var i = 0; i < day; i++) {
+        addData();
+    }
+    //设置图标配置项
+    myChart.setOption({
+        title:{
+            text:'ECharts 30天内数据实时更新'
+        },
+        xAxis:{
+            type:"category",
+            boundaryGap:false,
+            data:date
+        },
+        yAxis:{
+            boundaryGap:[0,'100%'],
+            type:'value'
+        },
+        series:[{
+            name:'成交',
+            type:'line',
+            smooth:true, //数据光滑过度
+            symbol:'none', //下一个数据点
+            stack:'a',
+            areaStyle:{
+                normal:{
+                    color:'red'
+                }
+            },
+            data:data
+        }]
+    })
+    setInterval(function(){
+        addData(true);
+        myChart.setOption({
+            xAxis:{
+                data:date
+            },
+            series:[{
+                name:'成交',
+                data:data
+            }]
+        });
+    },1000)
+
+    // 2:折线图
+    // 获取dom元素
+    var chartMain2 = document.getElementById('chartmain2');
+    // 初始化
+    var myChart2 = echarts.init(chartMain2);
+    // 设置参数配置
+    var option2={
+        title:{
+            text:'折线图'
+        },
+        tooltip:{},
+        legend:{
+            data:['用户来源']
+        },
+        xAxis:{
+            data:['数学','语文','英语']
+        },
+        yAxis:{
+        },
+        series:{
+            type:'line',   // 表示的是折线图
+            data:[98,80,54]
+        }
+
+    };
+    // 显示图表
+    myChart2.setOption(option2);
+
+    // 3:柱状图
+    // 获取dom元素
+    var chartMain3 = document.getElementById('chartmain3');
+    // 初始化
+    var myChart3 = echarts.init(chartMain3);
+    // 设置参数配置
+    var option3={
+        title:{
+            text:'柱状图'
+        },
+        tooltip:{},
+        legend:{
+            data:['模拟数据']
+        },
+        xAxis:{
+            data:['数学','语文','英语']
+        },
+        yAxis:{
+            splitLine:{
+                show:false  // 是否显示y轴的分割线 默认是true
+            }
+        },
+        series:{
+            type:'bar',   // 表示的是柱状图
+            data:[98,80,54],
+            name:'模拟数据',
+            barWidth:30,
+            itemStyle:{
+                normal:{
+                    color:function (pars) {
+                        var colorList=['red','green','blue'];
+                        return colorList[pars.dataIndex];
+                    }
+                },
+                // 鼠标悬停 柱子颜色、阴影等属性的设置
+                emphasis:{
+                    color:'#1acd7e',
+                    shadowBlur:10,
+                    shadowOffsetX:0,
+                    shadowColor:'rgba(0,0,0,0.5)'
+                }
+            }
+        }
+
+    };
+    // 显示图表
+    myChart3.setOption(option3);
+
+
+    // 4:饼状图
+    // 获取元素
+    var chartMain4 = document.getElementById('chartmain4');
+    // 初始化
+    var myChart4 = echarts.init(chartMain4);
+    var option4={
+        title:{
+            text:'饼状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:['数学','语文','英语']
+        },
+        series:{
+            type:'pie',    // 饼状图
+            // data:[ 98,80,54 ]     // data是一个数组 单个的数组
+            data:[      // 此时是一个对象数组
+                {name:'数学',value:98},
+                {name:'语文',value:84},
+                {name:'英语',value:54}
+            ]
+        }
+    };
+    // 显示图表
+    myChart4.setOption(option4);
+
+
+    // 5:绑定多组数据(没有悬浮提示)
+    var chartMain5 = document.getElementById('chartmain5');
+    // 初始化
+    var myChart5 = echarts.init(chartMain5);
+    var option5={
+        title:{
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }
+        ]
+    };
+    myChart5.setOption(option5);
+
+    // 6:绑定多组数据(有悬浮提示)
+    var chartMain6 = document.getElementById('chartmain6');
+    // 初始化
+    var myChart6 = echarts.init(chartMain6);
+    var option6={
+        title:{
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }
+        ]
+    };
+    myChart6.setOption(option6);
+
+    // 7:绑定多组数据(有悬浮提示+图例说明)
+    var chartMain7 = document.getElementById('chartmain7');
+    // 初始化
+    var myChart7 = echarts.init(chartMain7);
+    var option7={
+        title:{
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["数学","语文","英语"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70],
+            }
+        ]
+    };
+    myChart7.setOption(option7);
+
+    // 8:2个y轴   展示每一个学生的成绩和身高
+    var chartMain8 = document.getElementById('chartmain8');
+    // 初始化
+    var myChart8 = echarts.init(chartMain8);
+    var option8={
+        title:{
+            text:'2个y轴'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["成绩","身高"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:[        // 2个y轴  那么就是一个数组了
+            // 第一个y轴   成绩
+            {
+                type:'value',
+                name:'成绩',
+                min: 0,
+                max: 100,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            // 第二个y轴   身高
+            {
+                type:'value',
+                name:'身高',
+                min: 0,
+                max: 200,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} cm'
+                }
+            }
+        ],
+
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'成绩',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'身高',
+                type:'bar',
+                yAxisIndex:1,    // 使用第二个y轴
+                data:[105,150,185]
+            }
+
+        ]
+    };
+    myChart8.setOption(option8);
+
+
+    // 9:折柱混合+2个y轴
+    var chartMain9 = document.getElementById('chartmain9');
+    // 初始化
+    var myChart9 = echarts.init(chartMain9);
+    var option9={
+        title:{
+            text:'折柱混合+2个y轴'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["数学","语文","身高"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:[        // 2个y轴  那么就是一个数组了
+            // 第一个y轴   成绩
+            {
+                type:'value',
+                name:'成绩',
+                min: 0,
+                max: 100,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            // 第二个y轴   身高
+            {
+                type:'value',
+                name:'身高',
+                min: 0,
+                max: 200,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} cm'
+                }
+            }
+        ],
+
+        series:[    // 如果有多组数据 就是一个数组对象
+            // 这里有3组数据
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[50,84,68]
+            },
+            {
+                name:'身高',
+                type:'line',
+                yAxisIndex:1,    // 使用第二个y轴
+                data:[105,150,185]
+            }
+
+        ]
+    };
+    myChart9.setOption(option9);
+
+    // 10: 折柱混合+多个y轴
+    var chartMain10 = document.getElementById('chartmain10');
+    // 初始化
+    var myChart10 = echarts.init(chartMain10);
+    var option10={
+        title:{
+            text:'折柱混合+多个y轴'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["身高","数学","语文"]
+        },
+        grid: {
+            right: '20%'    // 往右偏移20%的距离
+        },
+        tooltip:{
+            axisPointer: {
+                type: 'cross'
+            },
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女'],
+        },
+        yAxis:[        // 多个(3个)y轴  那么就是一个数组了
+            // 第一个y轴   成绩
+            {
+                type:'value',
+                name:'数学',
+                min: 0,
+                max: 100,
+                position:'right',
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            {
+                type:'value',
+                name:'语文',
+                min:0,
+                max:100,
+                position:'right',
+                offset:80,
+                interval:20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            // 第二个y轴   身高
+            {
+                type:'value',
+                name:'身高',
+                min: 0,
+                max: 200,
+                position:'left',
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} cm'
+                }
+            }
+        ],
+
+        series:[    // 如果有多组数据 就是一个数组对象
+            // 这里有3组数据
+            {
+                name:'身高',
+                type:'line',
+                yAxisIndex:0,    // 使用第二个y轴
+                data:[50,70,90]
+            },
+            {
+                name:'数学',
+                yAxisIndex:1,
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                yAxisIndex:2,
+                data:[50,84,68]
+            }
+        ]
+    };
+    myChart10.setOption(option10);
+
+
+    // 11: 时间坐标轴
+    // 全局的变量
+    var a=new Date(2018,9,3);   // 10月份
+    var b=24*3600*1000;
+    var chartMain11 = document.getElementById('chartmain11');
+    // 初始化
+    var myChart11 = echarts.init(chartMain11);
+    var dataMain11=[];
+    for(var i=0;i<10;i++){
+        dataMain11.push(randomData());
+    }
+    // console.log(dataMain11);
+    var option11={
+        title:{
+            text:'x轴是时间轴'   // 饼状图是没有x轴和y轴的
+        },
+        grid: {
+            // right: '20%'    // 往右偏移20%的距离
+        },
+        tooltip:{
+            axisPointer: {
+                type: 'cross'
+            },
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            // data:['乔峰','杨过','小龙女'],
+            type:'time',
+            splitLine:{
+                show:false     // x轴的网格线
+            }
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%'],
+            splitLine: {
+                show: false
+            }
+        },
+        // 添加缩放
+        dataZoom: [{
+            startValue: '2018-10-04'
+        }, {
+            type: 'inside'
+        }],
+        series:[
+            {
+                name:'模拟数据',
+                type:'line',
+                data:dataMain11
+            }
+        ]
+    };
+    myChart11.setOption(option11);
+
+
+    // 12:动态数据
+    var chartMain12 = document.getElementById('chartmain12');
+    // 初始化
+    var myChart12 = echarts.init(chartMain12);
+    var dataMain12=[];
+    for(var i=0;i<100;i++){
+        dataMain12.push(randomData());
+    }
+    console.log('dataMain12:',dataMain12);
+    var option12={
+        title:{
+            text:'x轴是时间轴'   // 饼状图是没有x轴和y轴的
+        },
+        grid: {
+            // right: '20%'    // 往右偏移20%的距离
+        },
+        tooltip:{
+            axisPointer: {
+                type: 'cross'
+            },
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            // data:['乔峰','杨过','小龙女'],
+            type:'time',
+            splitLine:{
+                show:false     // x轴的网格线
+            }
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%'],
+            splitLine: {
+                show: false
+            }
+        },
+
+        series:[
+            {
+                name:'模拟数据',
+                showSymbol: false,  // 是否显示symbol
+                hoverAnimation:false,   // 在悬浮的时候也不显示symbol
+                type:'line',
+                data:dataMain12
+            }
+        ]
+    };
+
+    setInterval(function () {
+        // 每次只循环一次的作用
+        for(var i=0;i<1;i++){
+            dataMain12.shift(); // 删除第一个数据
+            dataMain12.push(randomData()); // 在末尾添加一个数据
+        }
+        myChart12.setOption({
+            series:[
+                {
+                    data:dataMain12   // 每隔1s更新一下数据
+                }
+            ]
+        });
+    },1000);
+    myChart12.setOption(option12);
+
+
+    // 13:点击按钮显示图标
+    var chartMain13 = document.getElementById('chartmain13');
+    // 初始化
+    var myChart13 = echarts.init(chartMain13);
+    var option13={
+        title:{
+            x:'right',
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:['数学','语文','英语']
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        grid:{
+            left:500
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }
+        ]
+    };
+    myChart13.setOption(option13);
+    // 给按钮添加单击事件   动态添加图表
+    // var btn=document.querySelector('#showBtn');
+    $('#addBtn').click(function () {
+        // 添加一个元素
+        option13.series.push({
+            name:'体育',
+            type:'bar',
+            data:[40,50,60]
+        });
+        // 添加一个元素
+        option13.legend.data.push('体育');
+        myChart13.setOption(option13);
+    });
+
+    // 动态清空图表
+    $('#clearBtn').click(function () {
+        // 删除
+        myChart13.clear();
+    });
+
+    // 动态删除图表
+    $('#delBtn').click(function () {
+        option13.series.pop();  // 删除最后一个元素
+        console.log(option13.series);
+        myChart13.setOption(option13,true);
+    });
+    // 14:下拉框动态显示图标(单选)
+    var chartMain14 = document.getElementById('chartmain14');
+    // 初始化
+    var myChart14 = echarts.init(chartMain14);
+    var option14={
+        title:{
+            x:'right',
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            // data:['数学','语文','英语']
+            data:['数学']   // 刚开始显示数学成绩
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        grid:{
+            left:500
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女'],
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+                barWidth:40   // 柱子的宽度
+
+            }/*,
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }*/
+        ]
+    };
+    // 显示图表
+    myChart14.setOption(option14);
+
+    // 给下拉框添加改变事件
+    $('#sel1').change(function () {
+        // 获取下拉框选中的值
+        var val=$(this).val();
+        var txt=$(this).find("option:selected").text();
+        console.log(val,txt);
+        // debugger;
+        if(val=='0'){
+            // 数学
+            option14.legend.data.shift();  // 删除第一个数据
+            option14.legend.data.push(txt);
+            option14.series.shift();    // 删除第一个数据
+            option14.series.push({
+                name:txt,
+                type:'bar',
+                barWidth:40,   // 柱子的宽度
+                data:[70,80,90]
+            });
+        }else if(val=='1'){
+            // 语文
+            option14.legend.data.shift();  // 删除第一个数据
+            option14.legend.data.push(txt);
+            option14.series.shift();    // 删除第一个数据
+            option14.series.push({
+                name:txt,
+                type:'bar',
+                barWidth:20,   // 柱子的宽度
+                data:[60,50,60]
+            });
+        }else{
+            // 英语
+            option14.legend.data.shift();  // 删除第一个数据
+            option14.legend.data.push(txt);
+            option14.series.shift();    // 删除第一个数据
+            option14.series.push({
+                name:txt,
+                type:'bar',
+                barWidth:40,   // 柱子的宽度
+                data:[30,50,70]
+            });
+        }
+        myChart14.setOption(option14);
+    });
+    // 已打卡页面触发改变下拉框的改变事件
+    $('#sel1').change();
+
+
+    // 15:下拉框动态显示图标(多选)
+    var chartMain15 = document.getElementById('chartmain15');
+    // 初始化
+    var myChart15 = echarts.init(chartMain15);
+    var option15={
+        title:{
+            x:'right',
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            // data:['数学','语文','英语']
+            data:['数学']   // 刚开始显示数学成绩
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        grid:{
+            left:500
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女'],
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+                barWidth:40   // 柱子的宽度
+
+            }/*,
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }*/
+        ]
+    };
+    // 显示图表
+    myChart15.setOption(option15,true);
+    // 给多选下拉框添加改变事件
+    $('#sel2').change(function () {
+        // $(this).selectpicker('val',['0']);
+        var arr=['数学','语文','英语'];
+        var datas=[
+            [70,80,90],   // 数学
+            [60,50,60],   // 语文
+            [30,50,70]    // 英语
+        ];
+
+
+        // 获取选中的数据
+        var vals=$(this).selectpicker('val');  // 返回的是一个数组
+        /*console.log(vals);
+        console.log(option15.series);*/
+        // console.log(vals===null);
+        if(vals===null){
+            // 如果没有选
+            return;
+        }else{
+            // 清空
+            option15.series.length=0;
+            for(var i=0;i<vals.length;i++){
+                option15.series.push({
+                    name:arr[vals[i]],
+                    type:'bar',
+                    data:datas[vals[i]],
+                    barWidth:40
+                });
+                option15.legend.data.push(arr[vals[i]]);
+            }
+        }
+        myChart15.setOption(option15,true);
+    });
+    // $('#sel2').change();
+
+    // 16: 横向柱状图
+    var chartMain16 = document.getElementById('chartmain16');
+    // 初始化
+    var myChart16 = echarts.init(chartMain16);
+    var option16={
+        title:{
+            x:'right',
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            // data:['数学','语文','英语']
+            // data:['数学']   // 刚开始显示数学成绩
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        grid:{
+            left:500
+        },
+        xAxis:{
+            type:'value'
+        },
+        yAxis:{
+            data:['乔峰','杨过','小龙女'],
+        },
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+                barWidth:20   // 柱子的宽度
+
+            }/*,
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }*/
+        ]
+    };
+    // 显示图表
+    myChart16.setOption(option16,true);
+
+    // 17: 双x轴
+    var chartMain17 = document.getElementById('chartmain17');
+    // 初始化
+    var myChart17 = echarts.init(chartMain17);
+    var option17={
+        title:{
+            x:'right',
+            text:'双x轴'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        xAxis:[
+            {
+                type:'value',
+                name:'成绩',
+                min: 0,
+                max: 100,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            {
+                type:'value',
+                name:'身高',
+                min:140,    // 最小的起始点
+                max:190
+            }
+        ],
+        yAxis:{
+            data:['乔峰','杨过','小龙女'],
+        },
+
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'成绩',
+                type:'bar',
+                data:[70,80,90],
+            },
+            {
+                name:'身高',
+                type:'line',
+                data:[150,175,185],
+                xAxisIndex:1   // 使用第二个x轴
+            }
+            /*,
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70]
+            }*/
+        ]
+    };
+    // 显示图表
+    myChart17.setOption(option17,true);
+
+    // 19:dataset的使用
+    var chartmain19 = document.getElementById('chartmain19');
+    // 初始化
+    var myChart19 = echarts.init(chartmain19);
+    var option19={
+        title:{
+            x:'right',
+            text:'dataset的使用'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+
+        },
+        tooltip:{
+            // trigger:'axis'
+        },
+        dataset:{
+            // 相当于定义了每一列的列标题了
+            dimensions:['name','数学','语文','英语'],
+            source:[
+                // 相当于定义了三行数据
+                {
+                    "name":"乔峰",
+                    '数学':90,
+                    '语文':80,
+                    '英语':70
+                },
+                {
+                    "name":"杨过",
+                    '数学':40,
+                    '语文':50,
+                    '英语':76
+                },
+                {
+                    "name":"小龙女",
+                    '数学':20,
+                    '语文':10,
+                    '英语':89
+                }
+            ]
+        },
+        xAxis:{
+            type:'category'
+        },
+        yAxis:{
+
+        },
+        series:[
+            {
+                type:'bar',
+                itemStyle:{
+                    normal:{
+                        color:'#1acd7e'
+                    }
+                }
+            },
+            {
+                type:'bar'
+            },
+            {
+                type:'bar'
+            }
+        ]
+    };
+    // 显示图表
+    myChart19.setOption(option19,true);
+
+    // 20:不同角度展示数据
+    var chartmain20 = document.getElementById('chartmain20');
+    // 初始化
+    var myChart20 = echarts.init(chartmain20);
+    var option20={
+        title:{
+            x:'right',
+            text:'不同角度展示数据'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+
+        },
+        tooltip:{
+            // trigger:'axis'
+        },
+        dataset:{
+            // 相当于定义了每一列的列标题了
+            // 可以看成一个表格形式的数据  有列有行
+            source:[
+                ['name','数学','语文','英语','体育'],  // 行
+                ['乔峰',90,70,60,50],
+                ['杨过',80,60,87,60],
+                ['小龙女',43,54,89,90]
+            ]
+        },
+        xAxis:[
+            {
+                type:'category',
+                gridIndex:0
+            },
+            {
+                type:'category',
+                gridIndex:1
+            }
+        ],
+        yAxis:[
+            {
+                gridIndex:0
+            },
+            {
+                gridIndex:1
+            }
+        ],
+        grid:[
+            {
+                bottom:'55%'
+            },
+            {
+                top:'55%'
+            }
+        ],
+        // 6个系列  相当于有6组
+        series:[
+            {
+                type:'bar',
+                seriesLayoutBy:'row',
+                itemStyle:{
+                    normal:{
+                        color:function(pars){
+                            var corlorList=['red','green','blue','yellow'];
+                            return corlorList[pars.dataIndex];
+                        }
+                    }
+                }
+            },
+            {
+                type:'bar',
+                seriesLayoutBy:'row'
+            },
+            {
+                type:'bar',
+                seriesLayoutBy:'row'
+            },
+            {
+                type:'bar',
+                yAxisIndex:1,
+                xAxisIndex:1,
+                itemStyle:{
+                    normal:{
+                        color:function (pars) {
+                            var colorList=['red','green','blue'];
+                            return colorList[pars.dataIndex];
+                        }
+                    }
+                }
+            },
+            {
+                type:'bar',
+                yAxisIndex:1,
+                xAxisIndex:1
+            },
+            {
+                type:'bar',
+                yAxisIndex:1,
+                xAxisIndex:1
+            },
+            {
+                type:'bar',
+                yAxisIndex:1,
+                xAxisIndex:1
+            }
+        ]
+    };
+    // 显示图表
+    myChart20.setOption(option20,true);
+
+
+    // 21: 散点图
+    var chartmain21 = document.getElementById('chartmain21');
+    // 初始化
+    var myChart21 = echarts.init(chartmain21);
+    var option21={
+        title:{
+            x:'right',
+            text:'散点图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+
+        },
+        tooltip:{
+            // trigger:'axis'
+        },
+
+        xAxis:{},
+        yAxis:{},
+        // 6个系列  相当于有6组
+        series:[
+            {
+                data:[
+                    [0.5,1],
+                    [1,2],
+                    [2,3],
+                    [3,4]
+                ],
+                type:'scatter',
+                symbolSize:20
+            }
+        ]
+    };
+    // 显示图表
+    myChart21.setOption(option21,true);
+
+
+    // 22: 事件处理
+    var chartMain22 = document.getElementById('chartmain22');
+    // 初始化
+    var myChart22 = echarts.init(chartMain22);
+    var option22={
+        title:{
+            text:'柱状图'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["数学","语文","英语"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70],
+            }
+        ]
+    };
+    myChart22.setOption(option22);
+
+    // 点击图例
+    myChart22.on('legendselectchanged ',function (e) {
+        // console.log(obj);
+        console.log(1);
+    });
+
+    // 23 颜色动态赋值
+    var chartMain23 = document.getElementById('chartmain23');
+    // 初始化
+    var myChart23 = echarts.init(chartMain23);
+    // 数据处理
+    // 名称
+    var course23=['数学','语文','英语'];
+    // 成绩
+    var score23=[
+        [70,80,90],
+        [60,50,60],
+        [30,50,70]
+    ];
+    // 颜色
+    var colors23=['blue','yellow','#1acd7e'];
+    var seriesData23=[];
+    for(var i=0;i<3;i++){
+        seriesData23.push({
+            name:course23[i],
+            type:'bar',
+            data:score23[i],
+            itemStyle:{
+                normal:{
+                    color:colors23[i]
+                }
+            }
+        })
+    }
+    var option23={
+        title:{
+            text:'颜色动态赋值'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["数学","语文","英语"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        /*series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+                itemStyle:{
+                    normal:{
+                        color:'blue'
+                    }
+                }
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60],
+                itemStyle:{
+                    normal:{
+                        color:'yellow'
+                    }
+                }
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70],
+                itemStyle:{
+                    normal:{
+                        color:'#1acd7e'
+                    }
+                }
+            }
+        ]*/
+        series:seriesData23
+    };
+    myChart23.setOption(option23);
+
+
+    // 24 2个y轴的颜色交叉处理
+    var chartmain24 = document.getElementById('chartmain24');
+    // 初始化
+    var myChart24 = echarts.init(chartmain24);
+
+    // 动态处理数据
+    var course24=['成绩','身高'];
+    var score24=[
+        [70,80,90],
+        [105,150,185]
+    ];
+    var colors=['blue','#1acd7e'];
+    var seriesData24=[];
+    for(var i=0;i<2;i++){
+        seriesData24.push({
+            name:course24[i],
+            type:'bar',
+            data:score24[i],
+            yAxisIndex:i,   // 有两个y轴
+            itemStyle:{
+                normal:{
+                    color:colors[i]
+                }
+            }
+        });
+    }
+    var option24={
+        title:{
+            text:'2个y轴的颜色交叉处理'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["成绩","身高"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:[        // 2个y轴  那么就是一个数组了
+            // 第一个y轴   成绩
+            {
+                type:'value',
+                name:'成绩',
+                min: 0,
+                max: 100,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} 分'
+                }
+            },
+            // 第二个y轴   身高
+            {
+                type:'value',
+                name:'身高',
+                min: 0,
+                max: 200,
+                interval: 20,
+                axisLabel: {
+                    formatter: '{value} cm'
+                }
+            }
+        ],
+
+        /*series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'成绩',
+                type:'bar',
+                data:[70,80,90],
+                itemStyle:{
+                    normal:{
+                        color:'blue'
+                    }
+                }
+
+            },
+            {
+                name:'身高',
+                type:'bar',
+                yAxisIndex:1,    // 使用第二个y轴
+                data:[105,150,185],
+                itemStyle:{
+                    normal:{
+                        color:'#1acd7e'
+                    }
+                }
+            }
+
+        ]*/
+        series:seriesData24
+    };
+    myChart24.setOption(option24);
+
+
+    // 25 legend分页处理
+    var chartmain25 = document.getElementById('chartmain25');
+    // 初始化
+    var myChart25 = echarts.init(chartmain25);
+
+    // 产生20个系列
+    var seriesDatat25=[];
+    for(var i=0;i<15;i++){
+        seriesDatat25.push({
+            type:'bar',
+            data:(function(){
+                var arr=[];
+                for(var i=0;i<3;i++){
+                    arr.push(Math.round(Math.random()*100));
+                }
+                console.log(arr);
+                return arr;
+            })(),
+            name:'数据-'+i,
+        });
+    }
+    // 设置参数配置
+    var option25={
+        title:{
+            text:'legend分页处理'
+        },
+        tooltip:{},
+        legend:{
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20
+            // data:['模拟数据']
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+            /*data:(function () {
+                var arr=[];
+                for(var i=0;i<20;i++){
+                    arr.push('图例-'+(i+1));
+                }
+                return arr;
+            })()*/
+        },
+        yAxis:{
+            splitLine:{
+                show:false  // 是否显示y轴的分割线 默认是true
+            }
+        },
+        /*series:{
+            type:'bar',   // 表示的是柱状图
+            // data:[98,80,54],
+            data:(function(){
+                var arr=[];
+                for(var i=0;i<3;i++){
+                    arr.push(Math.round(Math.random()*100));
+                }
+                console.log(arr);
+                return arr;
+            })(),
+            name:'模拟数据',
+            barWidth:30,
+            itemStyle:{
+                normal:{
+                    color:function (pars) {
+                        var colorList=['red','green','blue'];
+                        return colorList[pars.dataIndex];
+                    }
+                },
+                // 鼠标悬停 柱子颜色、阴影等属性的设置
+                emphasis:{
+                    color:'#1acd7e',
+                    shadowBlur:10,
+                    shadowOffsetX:0,
+                    shadowColor:'rgba(0,0,0,0.5)'
+                }
+            }
+        }*/
+        series:seriesDatat25
+
+    };
+    // 显示图表
+    myChart25.setOption(option25);
+
+
+
+    // 26 柱状图柱子颜色渐变
+    var chartMain26 = document.getElementById('chartmain26');
+    // 初始化
+    var myChart26 = echarts.init(chartMain26);
+    // 设置参数配置
+    var option26={
+        title:{
+            text:'柱状图柱子颜色渐变'
+        },
+        tooltip:{},
+        legend:{
+            data:['模拟数据']
+        },
+        xAxis:{
+            data:['数学','语文','英语']
+        },
+        yAxis:{
+            splitLine:{
+                show:false  // 是否显示y轴的分割线 默认是true
+            }
+        },
+        series:{
+            type:'bar',   // 表示的是柱状图
+            data:[98,80,54],
+            name:'模拟数据',
+            barWidth:50,
+            itemStyle:{
+                normal:{
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            // 渐变色
+                            {
+                                offset:0,
+                                color:'red'
+                            },
+                            {
+                                offset:0.5,
+                                color:'blue'
+                            },
+                            {
+                                offset:1,
+                                color:'yellow'
+                            }
+                        ]
+                    ),
+                    barBorderRadius:5    // 设置圆角
+                }/*,
+                // 鼠标悬停 柱子颜色、阴影等属性的设置
+                emphasis:{
+                    color:'#1acd7e',
+                    shadowBlur:10,
+                    shadowOffsetX:0,
+                    shadowColor:'rgba(0,0,0,0.5)'
+                }*/
+            }
+        }
+
+    };
+    // 显示图表
+    myChart26.setOption(option26);
+
+    // 27 给柱子添加单击事件
+    var chartMain27 = document.getElementById('chartmain27');
+    // 初始化
+    var myChart27 = echarts.init(chartMain27);
+    // 设置参数配置
+    var option27={
+        title:{
+            text:'柱状图柱子颜色渐变'
+        },
+        tooltip:{},
+        legend:{
+            data:['模拟数据']
+        },
+        xAxis:{
+            data:['数学','语文','英语']
+        },
+        yAxis:{
+            splitLine:{
+                show:false  // 是否显示y轴的分割线 默认是true
+            }
+        },
+        series:{
+            type:'bar',   // 表示的是柱状图
+            data:[98,80,54],
+            name:'模拟数据',
+            barWidth:50,
+            itemStyle:{
+                normal:{
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            // 渐变色
+                            {
+                                offset:0,
+                                color:'red'
+                            },
+                            {
+                                offset:0.5,
+                                color:'blue'
+                            },
+                            {
+                                offset:1,
+                                color:'yellow'
+                            }
+                        ]
+                    ),
+                    barBorderRadius:5    // 设置圆角
+                }/*,
+                // 鼠标悬停 柱子颜色、阴影等属性的设置
+                emphasis:{
+                    color:'#1acd7e',
+                    shadowBlur:10,
+                    shadowOffsetX:0,
+                    shadowColor:'rgba(0,0,0,0.5)'
+                }*/
+            }
+        }
+
+    };
+    // 显示图表
+    myChart27.setOption(option27);
+
+    // 27 给柱子添加单击事件(单系列)
+    myChart27.on('click',function (param) {
+        // console.log(param);
+        console.log('',param.data);
+    });
+
+
+    // 28 给柱子添加单击事件(多系列)
+    var chartMain28 = document.getElementById('chartmain28');
+    // 初始化
+    var myChart28 = echarts.init(chartMain28);
+    var option28={
+        title:{
+            text:'给柱子添加单击事件(多系列)'   // 饼状图是没有x轴和y轴的
+        },
+        legend:{
+            data:["数学","语文","英语"]
+        },
+        tooltip:{
+            trigger:'axis'   // 具有悬浮提示
+        },
+        xAxis:{
+            data:['乔峰','杨过','小龙女']
+        },
+        yAxis:{},
+
+        // 这里设置了三组数据
+        series:[    // 如果有多组数据 就是一个数组对象
+            {
+                name:'数学',
+                type:'bar',
+                data:[70,80,90],
+
+            },
+            {
+                name:'语文',
+                type:'bar',
+                data:[60,50,60]
+            },
+            {
+                name:'英语',
+                type:'bar',
+                data:[30,50,70],
+            }
+        ]
+    };
+    myChart28.setOption(option28);
+
+    // 给柱子添加单击事件
+    myChart28.on('click',function (param) {
+        console.log(param);
+    });
+
+
+    // 29 超过预警值，柱子颜色变化
+    var chartMain29 = document.getElementById('chartmain29');
+    // 初始化
+    var myChart29 = echarts.init(chartMain29);
+
+    // 设置预警值
+    var warningData=[60,60,60,60,60,60,60];
+    // 设置参数配置
+    var option29={
+        title:{
+            text:'超过预警值，柱子颜色变化'
+        },
+        tooltip:{},
+        legend:{
+            data:['实际值','预警值']
+        },
+        xAxis:{
+            name:'姓名',
+            data:['乔峰','杨过','小龙女','刘备','张飞','关羽','曹操']
+        },
+        yAxis:{
+            name:'成绩',
+            splitLine:{
+                show:false  // 是否显示y轴的分割线 默认是true
+            }
+        },
+        series:[
+            {
+                type:'bar',   // 表示的是柱状图
+                data:[98,80,54,78,87,66,45],
+                name:'实际值',
+                barWidth:30,
+                itemStyle:{
+                    normal:{
+                        color:function (pars) {
+                            // if(pars.dataIndex)
+                            // console.log(pars);
+                            // 超过了预警值 显示粉色
+                            if(pars.data>warningData[pars.dataIndex]){
+                                return 'pink';
+                            }else{
+                                // 没超过预警值
+                                return '#1acd7e';
+                            }
+                        }
+                    },
+                    // 鼠标悬停 柱子颜色、阴影等属性的设置
+                    emphasis:{
+                        color:'#1acd7e',
+                        shadowBlur:10,
+                        shadowOffsetX:0,
+                        shadowColor:'rgba(0,0,0,0.5)'
+                    }
+                }
+            },
+            {
+                name:'预警值',
+                type:'line',
+                itemStyle:{
+                    noromal:{
+                        color:'red'
+                    }
+                },
+                data:warningData
+            }
+        ]
+
+    };
+    // 显示图表
+    myChart29.setOption(option29);
+
+
+    // 30 交错正负轴
+    var chartMain30 = document.getElementById('chartmain30');
+    // 初始化
+    var myChart30 = echarts.init(chartMain30);
+
+    // 设置预警值
+    var warningData=[60,60,60,60,60,60,60];
+    // 设置参数配置
+    var option30={
+        title:{
+            text:'超过预警值，柱子颜色变化'
+        },
+        tooltip:{},
+        legend:{
+
+        },
+        grid:{
+            left:400
+        },
+        xAxis:{
+            min:-1,   // 设置最小的刻度值
+            max:1,    // 设置最大的刻度值
+            position:'top',
+            splitLine:{
+                lineStyle:{
+                    type:'dashed'   // 设置为虚线
+                }
+            }
+        },
+        yAxis:{
+            /*max:1,
+            min:-1,*/
+            tyep:'category',
+            data:['一','二','三','四','五','六','七','八','九','十'],
+            axisLabel: {
+                show: false     // 是否显示坐标轴上的刻度值
+            }
+        },
+        series:[
+            {
+                name:'生活费',
+                type:'bar',
+                label:{
+                    normal:{
+                        show:true,
+                        // formatter: '{b}'
+                    }
+                },
+                data:[-0.07,-0.09,0.2,0.44,-0.23,0.08,-0.17,0.47,-0.36,0.18]
+            }
+        ]
+
+    };
+    // 显示图表
+    myChart30.setOption(option30);
+
+
+    // test区域测试代码
+    function send() {
+        $.get('/test/confidence-band.json',function (data) {
+            console.log(data);
+        })
+    }
+
+    function randomData() {
+        // 产生模拟数据
+        a = new Date(+a+b);
+        return {
+            name: a.toString(),
+            value: [
+                [a.getFullYear(), a.getMonth() + 1, a.getDate()].join('/'),
+                Math.round(Math.random()*10)
+            ]
+        }
+    }
+</script>
+</html>
