@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <!-- bootstrap-select插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <!-- bootstrap-table插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts1" style="height: 400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/content.js"></script>
+<!-- bootstrap-select插件 -->
+<script src="js/bootstrap-select.js"></script>
+<!-- bootstrap-table插件   -->
+<script src="js/bootstrap-table.min.js"></script>
+<script>
+var echarts1 = document.getElementById('echarts1');
+// 初始化
+var myChart1 = echarts.init(echarts1);
+
+// 设置参数配置
+var option = {
+    title: {
+        text: 'echarts折线图实线加虚线'
+    },
+    //用formatter回调函数显示多项数据内容  
+    tooltip: {
+        trigger: 'axis',
+        formatter: function(params, ticket, callback) {
+            console.log(params);   // params是一个数组
+            var htmlStr = '';
+            var valMap = {};
+            for (var i = 0; i < params.length; i++) {
+                var param = params[i];
+                var xName = param.name; //x轴的名称  
+                var seriesName = param.seriesName; //图例名称  
+                var value = param.value; //y轴值  
+                var color = param.color; //图例颜色  
+
+                //过滤无效值
+                if (value == '-') {
+                    continue;
+                }
+
+                //过滤重叠值
+                if (valMap[seriesName] == value) {
+                    continue;
+                }
+
+                if (i === 0) {
+                    htmlStr += xName + '<br/>'; //x轴的名称  
+                }
+                htmlStr += '<div>';
+                //为了保证和原来的效果一样，这里自己实现了一个点的效果  
+                htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>';
+
+                //圆点后面显示的文本  
+                htmlStr += seriesName + '：' + value;
+
+                htmlStr += '</div>';
+                valMap[seriesName] = value;
+            }
+            return htmlStr;
+        }
+    },
+    legend: {
+        data: ['在线数']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+            name: '在线数',
+            type: 'line',
+            // data: [100, 100, "-", "-", "-", "-"]  // 实线      0
+            data:[100, 100, "-", "-", "-", "-"],
+            /*data: ["-", 100, 120, "-", "-", "-"]  // 虚线    1
+            data: ["-", "-", 120, 120, "-", "-"]  // 实线      2 
+            data: ["-", "-", "-", 120, 100,"-"]   // 虚线      3 
+            data: ["-", "-", "-", "-", 100, 100]  // 实线      4   */
+        },
+        {
+            name: '在线数',
+            type: 'line',
+            smooth: false, //关键点，为true是不支持虚线，实线就用true
+            itemStyle: {
+                normal: {
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted' //'dotted'虚线 'solid'实线
+                    }
+                }
+            },
+
+            data: ["-", 100, 120, "-", "-", "-"]
+        },
+        {
+            name: '在线数',
+            type: 'line',
+            data: ["-", "-", 120, 120, "-", "-"]
+        },
+        {
+            name: '在线数',
+            type: 'line',
+            smooth: false, //关键点，为true是不支持虚线，实线就用true
+            itemStyle: {
+                normal: {
+                    lineStyle: {
+                        width: 2,
+                        type: 'dotted' //'dotted'虚线 'solid'实线
+                    }
+                }
+            },
+
+            data: ["-", "-", "-", 120, 100,"-"]
+        },
+        {
+            name: '在线数',
+            type: 'line',
+            data: ["-", "-", "-", "-", 100, 100]
+        }
+
+    ]
+};
+
+// 显示图表
+myChart1.setOption(option);
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            width: 1000px;
+            height: 500px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+</body>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var myChart = null;
+
+    initChart();
+
+    function initChart() {
+        if (!myChart) {
+            myChart = echarts.init(document.getElementById('main'));
+        }
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ["2019-01-15 00:45:00", "2019-01-15 01:45:00", "2019-01-15 02:45:00", "2019-01-15 03:45:00", "2019-04-15 01:45:00", "2019-01-15 05:45:00", "2019-01-15 06:45:00"],
+                axisTick: {//决定是否显示坐标刻度  
+                    alignWithLabel: true,
+                    show: true
+                },
+                axisLabel: {  //决定是否显示数据  
+                    show: true,
+                    interval: 0,//横轴信息全部显示  
+                    rotate: -15,//-15度角倾斜显示
+                }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'scatter'
+            }]
+        };
+        myChart.setOption(option);
+    }
+
+    // 添加单击事件
+    myChart.on('click', show);
+
+    function show(param) {
+        console.log(param);
+        // 获取颜色
+        var color = param.color;
+        console.log(color);
+    }
+    // 鼠标移入事件
+    myChart.on('mouseover', show);
+</script>
+
+</html>
