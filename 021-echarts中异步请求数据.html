@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <button>显示图表</button>
+    <div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script>
+    let myCharts = null
+    myCharts = echarts.init(document.getElementById('main'))
+    $('button').on('click', function () {
+        // 显示loading
+        myCharts.showLoading()
+        $.ajax({
+            url: 'http://localhost:3000/electric',
+            type: 'get',
+            success: function (res) {
+                // 隐藏loading
+                myCharts.hideLoading()
+                initChart(res.xData,res.yData)
+            }
+        })
+    })
+    function initChart(xData, yData) {
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xData
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    data: yData,
+                    type: 'bar'
+                }
+            ]
+        }
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>

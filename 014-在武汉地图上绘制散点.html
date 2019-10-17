@@ -1,116 +1,132 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<style type="text/css">
-			* {
-				margin: 0;
-				padding: 0;
-			}
-			
-			html,
-			body {
-				height: 100%;
-			}
-			
-			#main {
-				height: 100%;
-				background-color: #ccc;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
 
-	<body>
-		<div id="main"></div>
-	</body>
-	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		// 散点在地图上的坐标
-		var geoCoordMap = {
-			'test':[116.25,30.551],
-			"市级基地1": [116.31,30.521],
-			"市级基地2": [113.31,31.52],
-			"市级基地3": [116.31,30.421]
-		};
-		// 将坐标与值对应并反映在地图上
-		var convertData = function(data) {
-			var res = [];
-			for(var i = 0; i < data.length; i++) {
-				var geoCoord = geoCoordMap[data[i].name];
-				if(geoCoord) {
-					res.push({
-						name: data[i].name,
-						value: geoCoord.concat(data[i].value)
-					});
-				}
+		html,
+		body {
+			height: 100%;
+		}
+
+		#main {
+			height: 100%;
+			background-color: #ccc;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main"></div>
+</body>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	// 散点在地图上的坐标
+	var geoCoordMap = {
+		"市级基地1": [114.356076, 30.242901],    // 江夏区
+		"市级基地2": [114.757995, 30.802437],         // 新洲区
+		"市级基地3": [114.356026, 30.978939],      // 黄陂区 
+		"新洲区1":[114.885646,30.982124],    // 新洲区上的第一个点
+		"新洲区2":[114.878082,31.002104],   // 新洲区上的第二个点
+		"新洲区3":[114.872588,30.988632]    // 新洲区上的第三个点(最后一个点)
+	};
+	// 将坐标与值对应并反映在地图上
+	var convertData = function (data) {
+		var res = [];
+		for (var i = 0; i < data.length; i++) {
+			var geoCoord = geoCoordMap[data[i].name];
+			if (geoCoord) {
+				res.push({
+					name: data[i].name,
+					value: geoCoord.concat(data[i].value)
+				});
 			}
-			return res;
-		};
-		$.get('mapdata/wuhan.json', function(data) { //这里是json转js，如果是js文件就不需要这一步
-			console.log('data',data);
-			echarts.registerMap('wuhan', data); //设置地图
-			var myChart = echarts.init(document.getElementById('main')); //初始化
-			myChart.setOption({
-				title: {
-					text: '武汉市'
+		}
+		console.log('处理之后的res:', res)
+		return res;
+	};
+	$.get('mapdata/wuhan.json', function (data) { //这里是json转js，如果是js文件就不需要这一步
+		console.log('data', data);
+		echarts.registerMap('wuhan', data); //设置地图
+		var myChart = echarts.init(document.getElementById('main')); //初始化
+		myChart.setOption({
+			title: {
+				text: '武汉市'
+			},
+			tooltip: {
+				formatter: function (params) {
+					console.log(params)
+					var info =
+						'<p style="font-size:18px">' +
+						params.name +
+						'</p><p style="font-size:14px">'+params.value[2]+'</p>'
+					return info
 				},
-				tooltip: {
-					formatter: function(params) {
-						console.log(params);
-						var info =
-							'<p style="font-size:18px">' + params.name +
-							'</p><p style="font-size:14px">{c}这里可以写一些，想展示在页面上的别的信息</p>'
-						return info;
+				backgroundColor: 'rgba(0,0,0,.5)', //提示标签背景颜色
+				textStyle: {
+					//提示标签字体颜色
+					color: '#fff'
+				}
+			},
+			geo: {
+				map: 'wuhan',
+				label: {
+					normal: {
+						show: true
 					},
-					//					formatter: '{b}<br/>{c}',
-					backgroundColor: "rgba(0,0,0,.5)", //提示标签背景颜色
-					textStyle: {
-						//提示标签字体颜色
-						color: "#fff"
-					}
-				},
-				geo: {
-					map: 'wuhan',
-					label: {
-						emphasis: {
-							show: true,
-							textStyle:{
-								color:'#fff'
-							}
-						}
-					},
-					itemStyle: {
-						normal: {
-							areaColor: '#666',
-							borderColor: '#111'
-						},
-						emphasis: {
-							areaColor: '#2a333d'
+					emphasis: {
+						show: true,
+						textStyle: {
+							color: '#fff',
 						}
 					}
 				},
-				series: [{
-					type: 'effectScatter',
+				itemStyle: {
+					normal: {
+						areaColor: '#666',
+						borderColor: '#111'
+					},
+					emphasis: {
+						areaColor: '#1acd7e'
+					}
+				}
+			},
+			series: [
+				{
+					// type: 'effectScatter',  // 带阴影的圆点
+					type: 'scatter',    // 没有阴影的圆点
 					coordinateSystem: 'geo',
 					data: convertData([
 						{
-							name:'test',
-							value:400
-						},
-						{
 							name: "市级基地1",
-							value: 310
+							value: 110
 						},
 						{
 							name: "市级基地2",
-							value: 310
+							value:220
 						},
 						{
 							name: "市级基地3",
-							value: 310
+							value: 330
+						},
+						{
+							name:'新洲区1',
+							value:440
+						},
+						{
+							name:'新洲区2',
+							value:550
+						},
+						{
+							name:'新洲区3',
+							value:660
 						}
 					]),
 					symbolSize: 5,
@@ -122,20 +138,14 @@
 							show: false
 						}
 					},
-					itemStyle: {
-						emphasis: {
-							borderColor: '#fff',
-							borderWidth: 1
-						}
-					}
 				}]
-			});
-
-			myChart.on('click', function(params) {
-				alert(1);
-				console.log(params); //此处写点击事件内容
-			}); //点击事件，此事件还可以用到柱状图等其他地图
 		});
-	</script>
+
+		myChart.on('click', function (params) {
+			alert(1);
+			console.log(params); //此处写点击事件内容
+		}); //点击事件，此事件还可以用到柱状图等其他地图
+	});
+</script>
 
 </html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .content{
+            width: 400px;
+            height: 400px;
+            border:1px solid red;
+            margin: 100px auto;
+        }
+        #main {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="noData">暂无数据</button>
+    <button id="hasData">有数据</button>
+    <hr>
+    <div class="content">
+        <div id="main">
+
+        </div>
+    </div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let noDataBtn = document.querySelector('#noData')
+    let hasDataBtn = document.querySelector('#hasData')
+    let main = document.querySelector('#main')
+    let nodata = document.querySelector('.nodata')
+    // 暂无数据的情况
+    noDataBtn.onclick = function () {
+        main.innerHTML = '<div style="text-align:center;">暂无数据</div>'
+        main.removeAttribute('_echarts_instance_')
+    }
+    // 有数据的情况
+    hasDataBtn.onclick = function () {
+        initChart(['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+         [120, 200, 150, 80, 70, 110, 130])
+    }
+    function initChart(xData, yData) {
+        let myCharts = null
+        myCharts = echarts.init(document.getElementById('main'))
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    data: xData
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    // data: [120, 200, 150, 80, 70, 110, 130],
+                    data: yData,
+                    type: 'bar'
+                }
+            ]
+        }
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>

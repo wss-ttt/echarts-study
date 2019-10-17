@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>作业运行</title>
+    <script src="js/echarts.min.js"></script>
+    <script src="mapdata/china.js"></script>
+</head>
+
+<body>
+    <div data-role="page" id="china-map" style="height: 700%"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('china-map'));
+        var geoCoordMap = {//自定义城市坐标
+            "青岛": [120.33, 36.07],
+            "厦门": [118.1, 24.46],
+            "宁波": [121.56, 29.86],
+            "深圳": [114.07, 22.62],
+            "大连": [121.62, 38.92]
+        };
+
+        var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        value: geoCoord.concat(data[i].value)
+                    });
+                }
+            }
+            return res;
+        };
+        option = {
+            backgroundColor: '#BBFFFF',
+            title: {
+                text: '异常分布',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                /* formatter: function (params) {
+                    var res = params.name + '<br/>';
+                    var myseries = option.series;
+                    if (convertData) {
+                        for (var i = 0; i < myseries.length - 1; i++) {
+                            for (var j = 0; j < myseries[i].data.length; j++) {
+                                if (myseries[i].data[j].name == params.name) {
+                                    res += myseries[i].name + ' : ' + myseries[i].data[j].value + '</br>';
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        for (var i = 0; i < myseries.length; i++) {
+                            for (var j = 0; j < myseries[i].data.length; j++) {
+                                if (myseries[i].data[j].name == params.name) {
+                                    res += myseries[i].name + ' : ' + myseries[i].data[j].value + '</br>';
+                                }
+                            }
+                        }
+                    }
+                    return res;
+                } */
+            },
+            /* legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: ['超时', '失败', '运行中']
+            }, */
+            /* dataRange: {
+                min: 0,
+                max: 30,
+                x: 'left',
+                y: 'bottom',
+                color: ['red', 'orange', 'yellow', 'green'],
+                text: ['高', '低'],
+                calculable: true
+            }, */
+            /* toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            }, */
+            /* roamController: {
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            }, */
+            geo: {
+                map: 'china',
+                label: {
+                    emphasis: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#FFE4CA',
+                        borderColor: '#84C1FF',
+                        borderWidth: 0.8
+                    },
+                    emphasis: {
+                        areaColor: '#FFC78E'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '前三',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    itemStyle: {
+                        normal: { label: { show: false } },
+                        emphasis: { label: { show: true } }
+                    },
+                    data: [
+                        { name: '广东', value: 4 },
+                        { name: '黑龙江', value: 1 },
+                        { name: '湖南', value: 3 }
+                    ]
+                },
+                /* {
+                    name: '前三',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    itemStyle: {
+                        normal: { label: { show: false } },
+                        emphasis: { label: { show: true } }
+                    },
+                    data: [
+                        { name: '广东', value: 40 },
+                        { name: '黑龙江', value: 10 },
+                        { name: '湖南', value: 30}
+                    ]
+                }, */
+            ]
+        };
+        myChart.setOption(option);
+        myChart.on('mouseover', function (params) {
+            var dataIndex = params.dataIndex;
+            console.log(params);
+        });
+
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+    </script>
+</body>
+
+</html>
