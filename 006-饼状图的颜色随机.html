@@ -1,102 +1,113 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<style type="text/css">
-			* {
-				margin: 0;
-				padding: 0;
-			}
-			
-			#main {
-				width: 500px;
-				height: 500px;
-				background-color: #ccc;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
 
-	<body>
-		<div id="main"></div>
-	</body>
-	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		var myChart = null;
-		
-		initChart();
-		function initChart() {
-			if(!myChart) {
-				myChart = echarts.init(document.getElementById('main'));
-			}
-			var option = {
-				title: {
-					text: '某站点用户访问来源',
-					subtext: '纯属虚构',
-					x: 'center'
+		#main {
+			width: 500px;
+			height: 500px;
+			background-color: #ccc;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main"></div>
+</body>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var myChart = null;
+
+	initChart();
+	function initChart() {
+		if (!myChart) {
+			myChart = echarts.init(document.getElementById('main'));
+		}
+		var option = {
+			title: {
+				text: '某站点用户访问来源',
+				subtext: '纯属虚构',
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				left: 'left',
+				data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+			},
+			series: [{
+				name: '访问来源',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '60%'],
+				data: [{
+					value: 335,
+					name: '直接访问'
 				},
-				tooltip: {
-					trigger: 'item',
-					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				{
+					value: 310,
+					name: '邮件营销'
 				},
-				legend: {
-					orient: 'vertical',
-					left: 'left',
-					data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+				{
+					value: 234,
+					name: '联盟广告'
 				},
-				series: [{
-					name: '访问来源',
-					type: 'pie',
-					radius: '55%',
-					center: ['50%', '60%'],
-					data: [{
-							value: 335,
-							name: '直接访问'
-						},
-						{
-							value: 310,
-							name: '邮件营销'
-						},
-						{
-							value: 234,
-							name: '联盟广告'
-						},
-						{
-							value: 135,
-							name: '视频广告'
-						},
-						{
-							value: 1548,
-							name: '搜索引擎'
+				{
+					value: 135,
+					name: '视频广告'
+				},
+				{
+					value: 1548,
+					name: '搜索引擎'
+				}
+				],
+				itemStyle: {
+					normal: {
+						/* color: function (value) {
+							console.log(value);
+							return "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+						} */
+						color: function (value) {
+							let colorList = ['#1acd7e']
+							return colorList[value.dataIndex]
 						}
-					],
-					itemStyle: {
-						emphasis: {
-							shadowBlur: 10,
-							shadowOffsetX: 0,
-							shadowColor: 'rgba(0, 0, 0, 0.5)'
-						}
+					},
+					emphasis: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
 					}
-				}]
-			};
-			myChart.setOption(option);
-		}
-		
-		
-		// 添加单击事件
-		myChart.on('click',show);
-		
-		function show(param){
-			console.log(param);
-			// 获取颜色
-			var color = param.color;
-			console.log(color);
-		}
-		
-		// 鼠标移入事件
-		myChart.on('mouseover',show);
-	</script>
+				}
+			}]
+		};
+		myChart.setOption(option);
+	}
+
+
+	// 添加单击事件
+	myChart.on('click', show);
+
+	function show(param) {
+		console.log(param);
+		// 获取颜色
+		var color = param.color;
+		console.log(color);
+	}
+
+	// 鼠标移入事件
+	myChart.on('mouseover', show);
+</script>
 
 </html>
