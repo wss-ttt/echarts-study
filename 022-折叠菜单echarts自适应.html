@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+        }
+
+        .container .header {
+            height: 50px;
+            background-color: #007069;
+            position: fixed;
+            top: 0;
+            left: 220px;
+            right: 0;
+        }
+
+        .container .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 220px;
+            background-color: bisque;
+        }
+
+
+        .container .content {
+            padding-top: 50px;
+            margin-left: 220px;
+            background-color: #ccc;
+            height: 100%;
+        }
+
+        .container .content .left-con {
+            height: 100%;
+        }
+        .container .content .left-con .tab-content{
+            height: 100%;
+        }
+        .container .content .left-con .tab-content #main {
+            width: 90%;
+            height: 80%;
+            background-color: cyan;
+            margin: auto;
+        }
+
+        .container .header.unfold {
+            left: 64px;
+        }
+
+        .container .sidebar.unfold {
+            width: 64px;
+        }
+
+        .container .content.unfold {
+            margin-left: 64px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button>折叠菜单/展开菜单</button>
+        </div>
+        <div class="sidebar"></div>
+        <div class="content">
+            <div class="left-con">
+                <div class="tab-content">
+                    <div id="main"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script>
+    let myCharts = null
+    myCharts = echarts.init(document.getElementById('main'))
+
+    $('button').on('click', function () {
+        $('.header').toggleClass('unfold')
+        $('.sidebar').toggleClass('unfold')
+        $('.content').toggleClass('unfold')
+        myCharts.resize()
+    })
+
+    $(function () {
+        myCharts.showLoading()
+        getData().then((data) => {
+            myCharts.hideLoading()
+            initChart(data.xData, data.yData)
+        })
+    })
+    // 获取数据
+    function getData() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'http://localhost:3000/electric',
+                type: 'get',
+                success: function (res) {
+                    resolve(res)
+                }
+            })
+        })
+    }
+    // 初始化图表
+    function initChart(xData, yData) {
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xData
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    data: yData,
+                    type: 'bar'
+                }
+            ]
+        }
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>
