@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .chart {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">添加该属性</button>
+    <button id="btn2">移除该属性</button>
+    <hr>
+    <div class="chart"></div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let btn1 = document.querySelector('#btn1')
+    let btn2 = document.querySelector('#btn2')
+    let oBox = document.querySelector('.chart')
+    // 通过echarts.init方法 就能添加上该属性了
+    btn1.onclick = function(){
+        echarts.init(oBox)
+        let res = echarts.getInstanceByDom(oBox)
+        console.log(res)
+    }
+
+    // 移除该属性
+    btn2.onclick = function(){
+        oBox.removeAttribute('_echarts_instance_')
+        let res = echarts.getInstanceByDom(oBox)
+        console.log(res)
+    }
+</script>
+
+</html>

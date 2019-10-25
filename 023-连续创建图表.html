@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">实例化</button>
+    <button id="btn2">创建图表</button>
+    <button id="btn3">销毁</button>
+    <button id="btn4">clear</button>
+    <button id="btn5">移除_echarts_instance_属性</button>
+    <div class="main"></div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let btn1 = document.querySelector('#btn1')
+    let btn2 = document.querySelector('#btn2')
+    let btn3 = document.querySelector('#btn3')
+    let btn4 = document.querySelector('#btn4')
+    let btn5 = document.querySelector('#btn5')
+    let oMain = document.querySelector('.main')
+    let myChart = null
+    // 销毁
+    btn3.onclick = function(){
+        // myChart.dispose()
+        echarts.dispose(myChart)
+    }
+    // 清除
+    btn4.onclick = function(){
+        myChart.clear()
+    }
+    // 在dom上移除_echarts_instance_属性
+    btn5.onclick = function(){
+        oMain.removeAttribute('_echarts_instance_')
+        oMain.innerHTML = '移除了_echarts_instance_属性'
+    }
+    // 实例化
+    btn1.onclick = function(){
+        myChart = echarts.init(oMain)
+    }
+    // 初始化图表
+    btn2.onclick = function () {
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    data: [120, 200, 150, 80, 70, 110, 130],
+                    type: 'bar'
+                }
+            ]
+        }
+        myChart.setOption(option)
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+</script>
+
+</html>

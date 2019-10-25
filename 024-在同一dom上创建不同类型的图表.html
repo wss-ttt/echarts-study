@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .chart {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">柱状图</button>
+    <button id="btn2">饼状图</button>
+    <button id="btn3">柱状图2</button>
+    <hr>
+    <div class="chart"></div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let myChart = null
+    let oBox = document.querySelector('.chart')
+    myChart = echarts.init(oBox)
+
+    let btn1 = document.querySelector('#btn1')
+    let btn2 = document.querySelector('#btn2')
+    let btn3 = document.querySelector('#btn3')
+    btn1.onclick = initBar
+    btn2.onclick = initPie
+    btn3.onclick = initBar2
+    function initBar() {
+        let option = {
+            title:{
+                text:'柱状图',
+                // x:'right'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar'
+            }]
+        };
+        // 清空数据 
+        // myChart.clear()
+        myChart.setOption(option)
+    }
+    function initBar2() {
+        let option = {
+            title:{
+                text:'柱状图2',
+                // x:'right'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天','aaa','bbb']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [142, 230, 151, 28, 370, 110, 130,45,987],
+                type: 'bar'
+            }]
+        };
+        // 清空数据 
+        myChart.clear()
+        myChart.setOption(option)
+    }
+    
+    function initPie() {
+        let option = {
+            title: {
+                text: '某站点用户访问来源',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                        { value: 335, name: '直接访问' },
+                        { value: 310, name: '邮件营销' },
+                        { value: 234, name: '联盟广告' },
+                        { value: 135, name: '视频广告' },
+                        { value: 1548, name: '搜索引擎' }
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 清空数据
+        myChart.clear()
+        myChart.setOption(option)
+    }
+</script>
+
+</html>
