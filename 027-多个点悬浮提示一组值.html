@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .content {
+            width: 500px;
+            height: 500px;
+            padding: 15px;
+            background-color: cornsilk;
+            margin: 100px auto;
+            overflow: auto;
+        }
+
+        .chart {
+            width: 100%;
+            height: 100%;
+            background-color: blanchedalmond;
+        }
+
+        .toolDiv {
+            color: red;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="chart"></div>
+    </div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+
+    initChart()
+
+    function initChart() {
+        let myCharts = null
+        let oBox = document.querySelector('.chart')
+        myCharts = echarts.init(oBox)
+        let option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            legend: {},
+            tooltip: {
+                // trigger:'item'
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line'
+                },
+                formatter:function(params){
+                    cosole.log(params)
+                }
+            },
+            series: [{
+                name: 'aa',
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
+            },
+            {
+                name: 'bb',
+                data: [600, 1000, 800.990, 1000, 1500, 1200],
+                type: 'line'
+            }
+            ]
+        };
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>
