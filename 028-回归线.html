@@ -139,7 +139,20 @@
                         res[i]['regression'] = regressionVal[i]
                     }
                     // console.log(res)
-
+                    let html = ''
+                    res.forEach(item=>{
+                        html += `名称:${item['name']}
+                        <br> 
+                        最大值:${item['max']}
+                        <br>
+                        最小值:${item['min']}
+                        <br>
+                        回归值:${item['regression']}
+                        <br>
+                        `
+                    })
+                    console.log(res)
+                    return html;
                 }
             },
             xAxis: {
