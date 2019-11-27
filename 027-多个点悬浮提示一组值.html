@@ -59,13 +59,23 @@
             },
             legend: {},
             tooltip: {
-                // trigger:'item'
+                // trigger:'item',
                 trigger: 'axis',
                 axisPointer: {
                     type: 'line'
                 },
                 formatter:function(params){
-                    cosole.log(params)
+                    console.log(params)
+                    let data = params.map(item=>{
+                        return item.value
+                    })
+                    let max = Math.max.apply(null,data)
+                    let min = Math.min.apply(null,data)
+                    return `<div>
+                        最大值:${max}
+                        <br>
+                        最小值:${min}
+                        </div>`
                 }
             },
             series: [{
@@ -75,9 +85,14 @@
             },
             {
                 name: 'bb',
-                data: [600, 1000, 800.990, 1000, 1500, 1200],
+                data: [600, 1000, 800,990, 1000, 1500, 1200],
                 type: 'line'
-            }
+            },
+            {
+                name: 'cc',
+                data: [700, 800, 500,1090, 800, 1300, 1400],
+                type: 'line'
+            },
             ]
         };
         myCharts.clear()

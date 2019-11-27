@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var aa = [
+        {
+            id: 1,
+            imei: '',
+            store_name: '合肥店'
+        },
+        {
+            id: 3,
+            imei: '3',
+            store_name: '合肥店'
+        },
+        {
+            id: 2,
+            imei: '1',
+            store_name: '芜湖店'
+        },
+        {
+            id: 4,
+            imei: '34343',
+            store_name: '上海店'
+        }
+    ];
+    // 进行分类操作
+    let keyContainer = {}
+    aa.forEach(item => {
+        keyContainer[item.store_name] = keyContainer[item.store_name] || []
+        keyContainer[item.store_name].push(item)
+    })
+    console.log(keyContainer)
+
+
+</script>
+
+</html>
