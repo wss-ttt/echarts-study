@@ -140,7 +140,7 @@
                     }
                     // console.log(res)
                     let html = ''
-                    res.forEach(item=>{
+                    res.forEach(item => {
                         html += `名称:${item['name']}
                         <br> 
                         最大值:${item['max']}
@@ -195,7 +195,7 @@
                     type: 'line',
                     showSymbol: false,
                     smooth: true,
-                    data: myRegression1.points,
+                    data: regression(data1).points,
                     markPoint: {
                         itemStyle: {
                             normal: {
@@ -206,7 +206,7 @@
                             normal: {
                                 show: true,
                                 position: 'left',
-                                formatter: myRegression1.expression,
+                                formatter: regression(data1).expression,
                                 textStyle: {
                                     color: '#333',
                                     fontSize: 14
@@ -214,7 +214,7 @@
                             }
                         },
                         data: [{
-                            coord: myRegression1.points[myRegression1.points.length - 1]
+                            coord: regression(data1).points[regression(data1).points.length - 1]
                         }]
                     }
                 },
@@ -240,7 +240,7 @@
                     type: 'line',
                     showSymbol: false,
                     smooth: true,
-                    data: myRegression2.points,
+                    data: regression(data2).points,
                     markPoint: {
                         itemStyle: {
                             normal: {
@@ -251,7 +251,7 @@
                             normal: {
                                 show: true,
                                 position: 'left',
-                                formatter: myRegression2.expression,
+                                formatter: regression(data2).expression,
                                 textStyle: {
                                     color: '#333',
                                     fontSize: 14
@@ -259,7 +259,7 @@
                             }
                         },
                         data: [{
-                            coord: myRegression2.points[myRegression2.points.length - 1]
+                            coord: regression(data2).points[regression(data2).points.length - 1]
                         }]
                     }
                 }]
@@ -272,6 +272,16 @@
         window.addEventListener('resize', () => {
             myCharts.resize()
         })
+    }
+
+    function regression(data) {
+        let myRegression = ecStat.regression('exponential', data)
+        myRegression.points.sort(function (a, b) {
+            return a[0] - b[0]
+        })
+        // return myRegression.points
+        console.log('myRegression', myRegression)
+        return myRegression
     }
 </script>
 
