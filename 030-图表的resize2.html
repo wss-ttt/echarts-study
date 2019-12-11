@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .chart {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+
+        .toolDiv {
+            color: red;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart" id="main"></div>
+    <button id="btn1">改变大小</button>
+</body>
+<script src="js/echarts.min.js"></script>
+<script src="js/ecStat.min.js"></script>
+<script src="js/lodash.js"></script>
+<script>
+    let myCharts = null
+    myCharts = echarts.init(document.getElementById('main'))
+    let xData = ['乔峰', '杨过', '小龙女']
+    let yData = [100, 90, 80]
+    initChart(xData, yData)
+    // 改变dom大小
+    let btn1 = document.querySelector('#btn1')
+    btn1.onclick = () => {
+        let oContent = document.querySelector('#main')
+        oContent.style.width = '600px'
+        oContent.style.height = '600px'
+        // resize一下
+        myCharts.resize()
+    }
+    // 初始化图表
+    function initChart(xData, yData) {
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xData
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    data: yData,
+                    type: 'bar'
+                }
+            ]
+        }
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>
