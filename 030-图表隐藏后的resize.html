@@ -14,7 +14,7 @@
         }
 
         .chart {
-            width: 400px;
+            width:100%;
             height: 400px;
             background-color: blanchedalmond;
         }
@@ -46,13 +46,10 @@
     // 显示
     btn1.onclick = () => {
         oMain.style.display = 'block'
-        // myCharts.resize()
     }
     // 隐藏
     btn2.onclick = () => {
         oMain.style.display = 'none'
-        // oMain.style.width = '600px'
-        // oMain.style.height = '600px'
     }
     // 初始化图表
     function initChart(xData, yData) {
@@ -90,5 +87,4 @@
         })
     }
 </script>
-
 </html>
