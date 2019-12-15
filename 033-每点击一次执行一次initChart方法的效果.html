@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #c1 {
+            width: 100%;
+            height: 300px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">执行</button>
+    <button id="btn2">显示</button>
+    <button id="btn3">隐藏</button>
+    <div id="c1"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/ecStat.min.js"></script>
+<script src="js/lodash.js"></script>
+<script type="text/javascript">
+    let myChart_c1 = null
+
+    $(function () {
+        let c1 = document.getElementById('c1')
+        myChart_c1 = echarts.init(c1)
+        initChart()
+    })
+    // 点击一次执行一次initChart
+    $('#btn1').click(function () {
+        initChart()
+    })
+    // 显示
+    $('#btn2').click(function () {
+        $('#c1').show()
+    })
+    // 隐藏
+    $('#btn3').click(function () {
+        $('#c1').hide()
+    })
+
+    function initChart() {
+        console.log('initChart')
+        let xData = ['乔峰','杨过','小龙女']
+        let yData = [100,80,90]
+        /* for (let i = 1; i <= 30; i++) {
+            xData.push('' + i)
+        }
+        // 模拟随机产生的数据
+        for (let i = 1; i <= 30; i++) {
+            var num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+            yData.push(num)
+        } */
+        let option = {
+            xAxis: {
+                type: 'category',
+                data: xData
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: yData,
+                    type: 'line'
+                }
+            ]
+        }
+        // 清空数据
+        // myChart_c1.clear()
+        myChart_c1.setOption(option)
+        window.addEventListener('resize', () => {
+            myChart_c1.resize()
+        })
+    }
+</script>
+
+</html>
