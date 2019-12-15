@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        button.active {
+            background-color: #1adc7e;
+        }
+
+        .charts {
+            width: 100%;
+            height: 300px;
+            border: 1px solid red;
+            display: none;
+        }
+
+        .charts.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>该实现方法,还是第一个tab标签下的图表能够正常显示,其他两个tab标签下的图表都被压缩了</h2>
+    <div class="tabs">
+        <button class="active">c1</button>
+        <button>c2</button>
+        <button>c3</button>
+    </div>
+    <div class="content">
+        <div class="charts active" id="c1"></div>
+        <div class="charts" id="c2"></div>
+        <div class="charts" id="c3"></div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/ecStat.min.js"></script>
+<script src="js/lodash.js"></script>
+<script type="text/javascript">
+    $(function () {
+        initChart_c1()
+        initChart_c2()
+        initChart_c3()
+    })
+    $('.tabs button').click(function () {
+        // 获取索引值
+        let index = $(this).index()
+        $('.tabs button').eq(index).addClass('active').siblings().removeClass('active')
+        $('.content .charts').eq(index).addClass('active').siblings().removeClass('active')
+    })
+    function initChart_c1() {
+        let oBox = document.getElementById('c1')
+        let myChart = echarts.init(oBox)
+        let xData = []
+        let yData = []
+        for (let i = 1; i <= 30; i++) {
+            xData.push('' + i)
+        }
+        // 模拟随机产生的数据
+        for (let i = 1; i <= 30; i++) {
+            var num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+            yData.push(num)
+        }
+        let option = {
+            xAxis: {
+                type: 'category',
+                data: xData
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: yData,
+                    type: 'line'
+                }
+            ]
+        }
+        myChart.setOption(option)
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+    function initChart_c2() {
+        let oBox = document.getElementById('c2')
+        let myChart = echarts.init(oBox)
+        let xData = []
+        let yData = []
+        for (let i = 1; i <= 30; i++) {
+            xData.push('' + i)
+        }
+        // 模拟随机产生的数据
+        for (let i = 1; i <= 30; i++) {
+            var num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+            yData.push(num)
+        }
+        let option = {
+            xAxis: {
+                type: 'category',
+                data: xData
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: yData,
+                    type: 'line'
+                }
+            ]
+        }
+        myChart.setOption(option)
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+    function initChart_c3() {
+        let oBox = document.getElementById('c3')
+        let myChart = echarts.init(oBox)
+        let xData = []
+        let yData = []
+        for (let i = 1; i <= 30; i++) {
+            xData.push('' + i)
+        }
+        // 模拟随机产生的数据
+        for (let i = 1; i <= 30; i++) {
+            var num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+            yData.push(num)
+        }
+        let option = {
+            xAxis: {
+                type: 'category',
+                data: xData
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: yData,
+                    type: 'line'
+                }
+            ]
+        }
+        myChart.setOption(option)
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+</script>
+
+</html>
