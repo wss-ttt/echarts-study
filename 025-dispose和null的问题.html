@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .chart {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">绘制图表</button>
+    <button id="btn2">暂无数据</button>
+    <hr>
+    <div class="chart"></div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let btn1 = document.querySelector('#btn1')
+    let btn2 = document.querySelector('#btn2')
+    let oBox = document.querySelector('.chart')
+    // 实例化 echarts实例对象
+    var myChart = echarts.init(oBox)
+    //  初始化图表
+    btn1.onclick = function () {
+        // tips1:
+        // myChart.dispose();// 
+        // myChart = null
+        console.log(myChart)
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
+            }]
+        };
+        myChart.setOption(option);
+    }
+</script>
+
+</html>
