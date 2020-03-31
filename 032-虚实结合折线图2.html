@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .chart {
+            width: 400px;
+            height: 400px;
+            background-color: blanchedalmond;
+        }
+
+        .toolDiv {
+            color: red;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart" id="main"></div>
+    <button type="button" id="btn1">改变数据</button>
+</body>
+<script src="js/echarts.min.js"></script>
+<script src="js/ecStat.min.js"></script>
+<script src="js/lodash.js"></script>
+<script>
+    var btn1 = document.getElementById('btn1');
+    let myCharts = null;
+    myCharts = echarts.init(document.getElementById('main'));
+    // var dataTime = ["2017-03-02", "2017-03-08"];
+    var dataTime = ["2017-09-08", "2017-09-14", "2017-10-13", "2017-10-25"];
+    // var dataValue = [-0.01114, -0.01114];
+    var dataValue = [0.00631, 0.00631, 0.01038, 0.01251];
+
+    initChart(dataTime, dataValue);
+    // 单击事件  改变数据
+    btn1.onclick = function () {
+        dataTime = ["2017-03-02", "2017-03-08"];
+        // dataTime = ["2017-09-08", "2017-09-14", "2017-10-13", "2017-10-25"];
+        dataValue = [-0.01114, -0.01114];
+        // dataValue = [0.00631, 0.00631, 0.01038, 0.01251];
+        initChart(dataTime, dataValue);
+    }
+    // 初始化图表
+    function initChart(dateTime, dataValue) {
+        let option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    data: dateTime
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                /* {
+                    data: dataValue,
+                    type: 'line'
+                } */
+            ]
+        }
+
+        // 处理数据
+        // 需要添加dataValue.length-1条数据(也就是dataValue.length-1个series对象)
+        for (let i = 0; i < dataValue.length - 1; i++) {
+            var data = [];
+            for (let j = 0; j < dataValue.length; j++) {
+                data[j] = '-';
+            }
+            for (let k = 0; k < dataValue.length; k++) {
+                if (k == i) {
+                    data[k] = dataValue[k];
+                    data[k + 1] = dataValue[k + 1];
+                    break;
+                }
+            }
+            console.log('内层循环', data);
+            if (i % 2 == 0) {
+                // 实线
+                option.series.push({
+                    name: '误差',
+                    type: 'line',
+                    data: data,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                width: 2,
+                                color: '#00927A'  // 折线的颜色
+                            }
+                        }
+                    }
+                });
+            } else {
+                // 虚线
+                option.series.push({
+                    name: '误差',
+                    type: 'line',
+                    smooth: false,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                width: 2,
+                                type: 'dotted',  // 虚线
+                                color: '#00927A'  // 折线的颜色
+                            }
+                        }
+                    },
+                    data: data
+                });
+            }
+        }
+        // 一定要清除数据(在同一个dom上绘制图表，改变数据的时候，一定要记得清除数据)
+        myCharts.clear();
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>
