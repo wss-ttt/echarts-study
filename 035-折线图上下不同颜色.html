@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 800px;
+            height: 400px;
+            border: 1px solid red;
+            margin: 100px auto;
+        }
+
+        #main {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div id="main">
+
+        </div>
+    </div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+    let data = [];
+    createData();
+    let series = data.map(item => {
+        let yAxis = item.yAxis.map(item=>{
+            return item<700?'':item
+        })
+        return {
+            name: item.seriesName,
+            data: yAxis,
+            type: 'line',
+            symbolSize: 0,
+            itemStyle: {
+                color: 'red'
+            },
+            markLine: {
+                slient: true,
+                data: [
+                    {
+                        yAxis: 700
+                    }
+                ]
+            }
+        }
+    })
+    let option = {};
+    option = {
+        legend: {},
+        xAxis: {
+            name: '时间',
+            data: data[0]['xAxis']
+        },
+        yAxis: {
+            name: '误差'
+        },
+        series: series
+    }
+    initChart(option)
+
+    console.log(data);
+    function createData() {
+        let xData = [];
+        for (let i = 0; i < 50; i++) {
+            xData.push('aaa' + i);
+        }
+        for (var i = 0; i < 5; i++) {
+            let yData = [];
+            for (let j = 0; j < 50; j++) {
+                let num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+                yData.push(num)
+            }
+            data.push({
+                xAxis: xData,
+                yAxis: yData,
+                seriesName: '异常' + i
+            })
+        }
+    }
+    function initChart(option) {
+        let myCharts = null
+        myCharts = echarts.init(document.getElementById('main'))
+        myCharts.clear()
+        myCharts.setOption(option)
+        window.addEventListener('resize', () => {
+            myCharts.resize()
+        })
+    }
+</script>
+
+</html>
