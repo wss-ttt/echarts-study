@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 800px;
+            height: 400px;
+            border: 1px solid red;
+            margin: 100px auto;
+        }
+
+        #main {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div id="main">
+
+        </div>
+    </div>
+    <div class="btns">
+        <button type="button">异常0</button>
+        <button type="button">异常1</button>
+        <button type="button">异常2</button>
+        <button type="button">异常3</button>
+    </div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script>
+
+    let btns = document.getElementsByTagName('button');
+    let data = [];
+    let myChart = null
+    myChart = echarts.init(document.getElementById('main'))
+    createData();
+    let series = data.map(item => {
+        let yAxis = item.yAxis.map(item => {
+            return item;
+        })
+        return {
+            name: item.seriesName,
+            data: yAxis,
+            type: 'line',
+            legendHoverLink: false,
+            symbolSize: 0,
+            lineStyle: {
+                width: 1
+            },
+            emphasis: {
+                lineStyle: {}
+            },
+            markLine: {
+                slient: true,
+                data: [
+                    {
+                        yAxis: 700
+                    }
+                ]
+            }
+        }
+    })
+    let pieces = [{
+        lt: 700,
+        color: '#ccc'
+    }, {
+        gte: 700,
+        lt: 1500,
+        color: '#FE3B44'
+    }];
+
+    let option = {};
+    option = {
+        legend: {
+            icon: 'none',  // 不显示图例的图标
+            // 设置图例文字的颜色
+            textStyle: {
+                color: 'green',
+            },
+            // data: data[0]['legendData'],
+            /* selected: {
+                '异常0': false,
+                '异常1': false,
+                '异常2': false,
+                '异常3': true,
+            } */
+        },
+        xAxis: {
+            name: '时间',
+            data: data[0]['xAxis']
+        },
+        yAxis: {
+            name: '误差'
+        },
+        visualMap: {
+            top: 10,
+            right: 10,
+            pieces: pieces,
+            show: false
+        },
+
+        series: series
+    }
+    initChart(option)
+    function createData() {
+        let xData = [];
+        let legendData = [];
+        for (let i = 0; i < 50; i++) {
+            xData.push('aaa' + i);
+        }
+        for (var i = 0; i < 4; i++) {
+            let yData = [];
+            for (let j = 0; j < 50; j++) {
+                let num = Math.floor(Math.random() * (1500 - 100 + 1) + 100) // 向下取整
+                yData.push(num)
+            }
+            legendData.push('异常' + i);
+            data.push({
+                xAxis: xData,
+                yAxis: yData,
+                legendData: legendData,
+                seriesName: '异常' + i
+            })
+        }
+    }
+
+    function initChart(option) {
+
+        myChart.clear()
+        myChart.setOption(option);
+        myChart.on('legendselectchanged', function (params) {
+            console.log(params)
+            // 获取当前点击的图例的名称
+            var name = params.name;
+            var selected = params.selected;
+            // 获取当前图例的状态(true:表示是显示的，flase：表示是隐藏的)
+            var flag = selected[name];
+            // 获取所有图例的名称
+            var selectArr = myChart.getOption().legend[0].data;
+            var obj = {};
+            for (var i = 0; i < selectArr.length; i++) {
+                obj[selectArr[i]] = !flag;
+            }
+            // 开始找series 是一个数组
+            var series = myChart.getOption().series;
+            var currentSeries = null
+            for (var i = 0; i < series.length; i++) {
+                if (name === series[i]['name']) {
+                    currentSeries = series[i];
+                    series[i]['lineStyle']['width'] = 4;
+                    series[i]['emphasis']['lineStyle']['shadowBlur'] = 10;
+                    series[i]['emphasis']['lineStyle']['shadowColor'] = 'blue';
+                } else {
+                    // 其他的
+                    series[i]['lineStyle']['width'] = 1;
+                }
+            }
+            // 获取legend数据
+            console.log(myChart.getOption().legend);
+            console.log(option.legend);
+            // 最后是需要执行该行代码的
+            option.series = series;
+            option.legend.selected = obj;
+            option.legend.textStyle['fontWeight'] = 'bold';
+            myChart.setOption(option);
+        })
+
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+</script>
+
+</html>
