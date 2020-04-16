@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #c1 {
+            width: 400px;
+            height: 400px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">执行</button>
+    <button id="btn2">显示</button>
+    <button id="btn3">隐藏</button>
+    <div id="c1"></div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+    var oBox = document.getElementById('c1');
+    var myChart = echarts.init(oBox);
+    initChart();
+    function initChart() {
+        let option = {
+            legend: {
+                data: ['业务指标']
+            },
+            tooltip: {
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            series: [
+                {
+                    name: "正常状态统计",
+                    type: "gauge", // 类型为仪表
+                    radius: "100%", // 仪表直径
+                    startAngle: "180", // 起始角度
+                    endAngle: "0", // 结束角度
+                    detail: {
+                        fontSize: 0,
+                        offsetCenter: ["0%", "0%"], //相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                    }, // 显示数据
+                    splitNumber: 1, // 仪表盘刻度的分割段数
+                    data: [{
+                        // 数据项的名称
+                        name: '正常状态统计',
+                        // 数据项值8
+                        value: 10
+                    }],
+                    axisLine: {
+                        lineStyle: {
+                            color: [
+                                [0.2, 'red'],
+                                [1, "yellow"]
+                            ], //仪表盘的轴线可以被分成不同颜色的多段。每段的结束位置和颜色可以通过一个数组来表示。
+                            width: 25, // 轴线宽度。
+                            opacity: "1" //图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                        }
+                    }
+                }
+            ]
+        };
+
+        myChart.setOption(option, true)
+        window.addEventListener('resize', () => {
+            myChart.resize()
+        })
+    }
+</script>
+
+</html>
