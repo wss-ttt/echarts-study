@@ -13,7 +13,7 @@
         }
 
         .content {
-            width: 800px;
+            width: 500px;
             height: 400px;
             border: 1px solid red;
             margin: 100px auto;
@@ -22,6 +22,7 @@
         #main {
             width: 100%;
             height: 100%;
+            background-color: #0D141E;
         }
     </style>
 </head>
@@ -37,65 +38,82 @@
 <script>
     var myChart = echarts.init(document.getElementById('main'));
     var option = {
-        title: {
-            text: '折线图堆叠'
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
         legend: {
-            // data: ['邮件营销', '联盟广告', '视频广告'],
             icon: 'none',
             data: [{
                 name: '邮件营销',
                 textStyle: {
-                    fontWeight: 'normal'
+                    fontWeight: 'normal',
+                    color: '#fff'
                 }
             }, {
                 name: '联盟广告',
                 textStyle: {
-                    fontWeight: 'normal'
+                    fontWeight: 'normal',
+                    color: '#fff'
                 }
             }, {
                 name: '视频广告',
                 textStyle: {
-                    fontWeight: 'normal'
+                    fontWeight: 'normal',
+                    color: '#fff'
                 }
             }]
         },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
         xAxis: {
             type: 'category',
-            boundaryGap: false,
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            splitLine: {
+                show: false
+            },
             data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            splitLine: {
+                show: false
+            }
         },
         series: [
             {
                 name: '邮件营销',
                 type: 'line',
-                stack: '总量',
-                data: [120, 132, 101, 134, 90, 230, 210]
+                lineStyle: {
+                    color: 'red',
+                    width: 1
+                },
+                symbolSize: 0,
+                data: [120, 132, 101, 134, 90, 230, 210],
             },
             {
                 name: '联盟广告',
                 type: 'line',
-                stack: '总量',
+                lineStyle: {
+                    color: 'green',
+                    width: 1
+                },
+                symbolSize: 0,
                 data: [220, 182, 191, 234, 290, 330, 310]
             },
             {
                 name: '视频广告',
                 type: 'line',
-                stack: '总量',
+                lineStyle: {
+                    color: 'blue',
+                    width: 1
+                },
+                symbolSize: 0,
                 data: [150, 232, 201, 154, 190, 330, 410]
-            },
+            }
         ]
     };
 
@@ -103,26 +121,30 @@
     myChart.on('legendselectchanged', function (params) {
         var name = params.name;
         var selected = params.selected;
-        // 获取当前图例的状态(true:表示是显示的，flase：表示是隐藏的)
-        var flag = selected[name];
-        // 获取所有图例的名称
-        var legendArr = myChart.getOption().legend[0].data;
-        var selectArr = legendArr.map(item=>{
-            return item.name
-        })
-        var obj = {};
-        for (var i = 0; i < selectArr.length; i++) {
-            // 取消图例灰色显示
-            obj[selectArr[i]] = !flag;
-            if(name === legendArr[i]['name']){
-                legendArr[i]['textStyle']['fontWeight'] = 'bold';
-            }else{
-                legendArr[i]['textStyle']['fontWeight'] = 'normal';
+        selected[name] = true;
+        // 获取legend数据
+        var legend = myChart.getOption().legend[0].data;
+        // 获取series数据
+        var series = myChart.getOption().series;
+        for (var i = 0; i < legend.length; i++) {
+            if (name === legend[i]['name']) {
+                // 当前的legend高亮显示
+                legend[i]['textStyle']['fontWeight'] = 'bold';
+                legend[i]['textStyle']['color'] = 'yellow';
+                series[i]['lineStyle']['width'] = 4;
+                series[i]['lineStyle']['opacity'] = 1;
+            } else {
+                // 排他思想 其他legend恢复
+                legend[i]['textStyle']['fontWeight'] = 'normal';
+                legend[i]['textStyle']['color'] = '#fff';
+                series[i]['lineStyle']['width'] = 1;
+                series[i]['lineStyle']['opacity'] = 0.5;
             }
         }
         // 改变数据
-        option.legend.selected = obj;
-        option.legend.data = legendArr;
+        option.legend.selected = selected;
+        option.legend.data = legend;
+        option.series = series;
         // 重新setOption
         myChart.setOption(option);
     })
