@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            width: 400px;
+            height: 400px;
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script src="js/echarts.min.js"></script>
+    <script type="text/javascript">
+        var myChart = null;
+        var xData = [];
+        var seriesData = [];
+        getData();
+        console.log('开始渲染图表')
+        initChart(xData, seriesData);
+        // 这里就表明图表渲染完成了
+        console.log('图表渲染完成')
+
+        function initChart(xData, seriesData) {
+            if (!myChart) {
+                myChart = echarts.init(document.getElementById('main'));
+            }
+            let option = {
+                xAxis: {
+                    type: 'category',
+                    data: xData
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: seriesData,
+                    type: 'line'
+                }]
+            };
+            myChart.setOption(option);
+        }
+
+        function getData() {
+            for (let i = 0; i < 100000; i++) {
+                xData.push('a' + i);
+                seriesData.push(Math.round(Math.random()*10 + 1000));
+            }
+        }
+    </script>
+</body>
+
+</html>
