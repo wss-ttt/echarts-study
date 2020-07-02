@@ -19,11 +19,21 @@
 			height: 100%;
 			background-color: #ccc;
 		}
+
+		.actions {
+			position: absolute;
+			top: 100px;
+			left: 100px;
+		}
 	</style>
 </head>
 
 <body>
 	<div id="main"></div>
+	<div class="actions">
+		<button type="button">高亮</button>
+		<button type="button">取消高亮</button>
+	</div>
 	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
@@ -95,30 +105,19 @@
 				console.log(params); //此处写点击事件内容
 			}); //点击事件，此事件还可以用到柱状图等其他地图
 
-			// 设置高亮自动轮播
-			var index = 0;
-			var timer = null;
-			timer = setInterval(function () {
-				console.log('data', data)
+			let btns = document.querySelectorAll('button')
+			btns[0].onclick = function () {
 				myChart.dispatchAction({
-					type: 'downplay',
-					seriesIndex: 0,
+					type: 'highlight', // 高亮
+					// dataIndex: 1 // 不添加该dataIndex属性，就会高亮所有的
 				});
+			}
+			btns[1].onclick = function() {
 				myChart.dispatchAction({
-					type: 'highlight',
-					seriesIndex: 0,
-					dataIndex: index
+					type: 'downplay', // 取消高亮
+					// dataIndex: 1 // 不添加该dataIndex属性，就会高亮所有的
 				});
-				myChart.dispatchAction({
-					type: 'showTip',
-					seriesIndex: 0,
-					dataIndex: index
-				});
-				index++;
-				if (index > data.features.length - 1) {
-					index = 0;
-				}
-			}, 1000);
+			}
 		});
 	</script>
 </body>
