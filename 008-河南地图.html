@@ -24,10 +24,8 @@
 	</body>
 	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="mapdata/henan.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$.get('mapdata/hubei.json', function(data) { //这里是json转js，如果是js文件就不需要这一步
-			console.log(data);
 			echarts.registerMap('hubei', data); //设置地图
 			var myChart = echarts.init(document.getElementById('main')); //初始化
 			myChart.setOption({
