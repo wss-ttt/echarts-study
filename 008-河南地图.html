@@ -36,7 +36,6 @@
 				},
 				tooltip: {
 					formatter: function(params) {
-						console.log(params);
 						var info =
 							'<p style="font-size:18px">' + params.name +
 							'</p><p style="font-size:14px">{c}这里可以写一些，想展示在页面上的别的信息</p>'
@@ -80,19 +79,18 @@
 					data: [{
 							name: '武汉市',
 							value: 1,
-							selected: true
+							selected: true // 被选中(高亮的状态)状态
 						},
 						{
 							name: '黄石市',
 							value: 2,
-							selected: true
+							selected: true // 被选中(高亮的状态)状态
 						}
 					]
 				}]
 			});
 
 			myChart.on('click', function(params) {
-				alert(1);
 				console.log(params); //此处写点击事件内容
 			}); //点击事件，此事件还可以用到柱状图等其他地图
 		});
