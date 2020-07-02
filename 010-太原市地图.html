@@ -89,8 +89,9 @@
 		// 设置高亮自动轮播
 		var index = 0;
 		var timer = null;
-		timer = setInterval(function () {
-			console.log('data', data)
+		timer = setInterval(autoPlay, 1000);
+
+		function autoPlay() {
 			myChart.dispatchAction({
 				type: 'downplay',
 				seriesIndex: 0,
@@ -107,10 +108,35 @@
 			});
 			// 第一个小店区 最后一个是古交市 总共为10个市，所以index最大值为9
 			index++;
-			if (index > data.features.length - 1) { // 这里需要减去一个1
+			if (index > data.features.length - 1) { // 这里需要减去一个1 或者写成 index >= data.features.length
 				index = 0;
 			}
-		}, 1000);
+		}
+		// 鼠标移入 停止轮播
+		myChart.on('mouseover', function (params) {
+			console.log('params', params);
+			console.log(params.dataIndex);
+			// 清除定时器
+			clearInterval(timer);
+			myChart.dispatchAction({
+				type: 'downplay', // 取消高亮
+				seriesIndex: 0,
+			});
+			myChart.dispatchAction({
+				type: 'highlight', // 高亮
+				seriesIndex: 0,
+				dataIndex: params.dataIndex // 让当前这个高亮
+			});
+			myChart.dispatchAction({
+				type: 'showTip',
+				seriesIndex: 0,
+				dataIndex: params.dataIndex // 让当前这个显示tooltip
+			});
+		});
+		// 鼠标移出 启动轮播
+		myChart.on('mouseout', function () {
+			timer = setInterval(autoPlay, 1000);
+		})
 	});
 </script>
 
