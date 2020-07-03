@@ -16,15 +16,41 @@
 
 <body>
   <div id="main"></div>
+  <button type="button">切换数据1</button>
+  <button type="button">切换数据2</button>
   <script src="js/echarts.min.js"></script>
   <script type="text/javascript">
+    var btns = document.querySelectorAll('button');
     var myChart = null;
     // x轴的数据进行复制一份出来
     var xData = ['一', '二', '三', '四', '五', '六', '七', '一', '二', '三', '四', '五', '六', '七'];
     // y轴的数据进行复制一份出来
     var seriesData = [10, 20, 30, 40, 50, 60, 70, 10, 20, 30, 40, 50, 60, 70];
+    btns[0].onclick = function () {
+      xData = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5'];
+      seriesData = [33, 44, 55, 22, 66, 33, 44, 55, 22, 66];
+      // 清除定时器
+      clearInterval(timer);
+      initChart(xData.slice(0, 3), seriesData.slice(0, 3));
+      // 开启定时器
+      start = 0;
+      end = 3;
+      timer = setInterval(autoPlay, 1000);
+    }
+    btns[1].onclick = function () {
+      xData = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'aaa', 'bbb', 'ccc', 'ddd', 'eee',];
+      seriesData = [34, 56, 23, 65, 78, 34, 56, 23, 65, 78];
+      // 清除定时器
+      clearInterval(timer);
+      initChart(xData.slice(0, 3), seriesData.slice(0, 3));
+      // 开启定时器
+      start = 0;
+      end = 3;
+      timer = setInterval(autoPlay, 1000);
+    }
+
     // 假设只默认显示2个数据,所以这里进行截取数据
-    initChart(xData.slice(0, 5), seriesData.slice(0, 5));
+    initChart(xData.slice(0, 3), seriesData.slice(0, 3));
 
     function initChart(xData, seriesData) {
       if (!myChart) {
@@ -70,21 +96,23 @@
     }
 
     var start = 0,
-      end = 5;
+      end = 3;
     var timer = null;
     // 开启一个定时器
-    timer = setInterval(() => {
+    timer = setInterval(autoPlay, 1000);
+
+    function autoPlay() {
       start++;
       end++;
       let xT = xData.slice(start, end);
       let yT = seriesData.slice(start, end);
-      if (start === 7) {
+      if (start === xData.length / 2) {
         // 瞬间回到开始的位置(和轮播图的原理是一样的)
         start = 0;
-        end = 5;
+        end = 3;
       }
       initChart(xT, yT);
-    }, 1000)
+    }
   </script>
 </body>
 
