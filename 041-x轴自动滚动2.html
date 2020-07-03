@@ -9,7 +9,7 @@
     #main {
       width: 400px;
       height: 400px;
-      background: #ccc;
+      background: rgba(0, 0, 0, 1);
     }
   </style>
 </head>
@@ -33,10 +33,32 @@
       let option = {
         xAxis: {
           type: 'category',
-          data: xData
+          data: xData,
+          spliLine: {
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#fff'
+            }
+          },
+          axisLabel: {
+            // color: '#fb3'
+          }
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#fff'
+            }
+          },
+          axisLabel: {
+            // color: '#fb3'
+          }
         },
         series: [{
           data: seriesData,
