@@ -89,6 +89,7 @@
   // 自动轮播高亮柱状图
   function autoPlay() {
     setInterval(() => {
+      // 高亮和取消高亮不需要设置seriesIndex属性值
       myChart.dispatchAction({
         type: 'downplay', // 取消高亮
       });
@@ -96,6 +97,8 @@
         type: 'highlight', // 高亮
         dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
       });
+
+      // 显示tooltip时,必须要指定seriesIndex属性值
       myChart.dispatchAction({
 				type: 'showTip',
         seriesIndex: 0, // 这个地方必须指定seriesIndex
