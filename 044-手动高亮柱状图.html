@@ -11,7 +11,7 @@
     }
 
     #main {
-      width: 500px;
+      width: 800px;
       height: 500px;
       background-color: #ccc;
     }
@@ -36,6 +36,15 @@
       myChart = echarts.init(document.getElementById('main'));
     }
     var option = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        },
+        /* formatter: params => {
+          console.log('params', params);
+        } */
+      },
       xAxis: {
         type: 'category',
         data: xData
@@ -56,6 +65,9 @@
             color: '#1acd7e'
           }
         }
+      }, {
+        type: 'line',
+        data: [30, 40, 50, 60, 70, 80, 90]
       }]
     };
 
@@ -84,6 +96,11 @@
         type: 'highlight', // 高亮
         dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
       });
+      myChart.dispatchAction({
+				type: 'showTip',
+        seriesIndex: 0, // 这个地方必须指定seriesIndex
+				dataIndex: index
+			});
       index++;
       if (index === yData.length) {
         index = 0;
