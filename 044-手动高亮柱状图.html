@@ -84,32 +84,38 @@
   }
   let index = 0
   let timer = null;
-  autoPlay();
+  timer = setInterval(autoPlay, 1000);
 
   // 自动轮播高亮柱状图
   function autoPlay() {
-    setInterval(() => {
-      // 高亮和取消高亮不需要设置seriesIndex属性值
-      myChart.dispatchAction({
-        type: 'downplay', // 取消高亮
-      });
-      myChart.dispatchAction({
-        type: 'highlight', // 高亮
-        dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
-      });
+    // 高亮和取消高亮不需要设置seriesIndex属性值
+    myChart.dispatchAction({
+      type: 'downplay', // 取消高亮
+    });
+    myChart.dispatchAction({
+      type: 'highlight', // 高亮
+      dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
+    });
 
-      // 显示tooltip时,必须要指定seriesIndex属性值
-      myChart.dispatchAction({
-				type: 'showTip',
-        seriesIndex: 0, // 这个地方必须指定seriesIndex
-				dataIndex: index
-			});
-      index++;
-      if (index === yData.length) {
-        index = 0;
-      }
-    }, 1000)
+    // 显示tooltip时,必须要指定seriesIndex属性值
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0, // 这个地方必须指定seriesIndex
+      dataIndex: index
+    });
+    index++;
+    if (index === yData.length) {
+      index = 0;
+    }
   }
+  // 移入操作-停止自动轮播效果
+  myChart.on('mouseover', function (params) {
+    clearInterval(timer);
+  })
+  // 移除操作-开启自动轮播效果
+  myChart.on('mouseout', function (params) {
+    timer = setInterval(autoPlay, 1000);
+  })
 </script>
 
 </html>
