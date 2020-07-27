@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #main {
+        width: 500px;
+        height: 500px;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main"></div>
+  </body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'))
+    // 使用的时json文件
+    $.get('mapdata/china.json', function (data) {
+      console.log(data) // 输出的是地图数据
+      echarts.registerMap('chinatest', data) //设置地图
+      let option = {
+        geo: {
+          map: 'chinatest'
+        }
+      }
+      myChart.setOption(option)
+    })
+  </script>
+</html>
