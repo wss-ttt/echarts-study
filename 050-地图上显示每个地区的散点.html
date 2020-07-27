@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #main {
+        width: 800px;
+        height: 600px;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main"></div>
+  </body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script type="text/javascript">
+    let myChart = echarts.init(document.getElementById('main'))
+    // 使用的时json文件
+    $.get('mapdata/hubei.json', function (res) {
+      console.log('res', res)
+      let geoCoordMap = {}
+      let data = res.features.map(item => {
+        // 显示窗口的数据转换
+        return {
+          value: +(Math.random() * 1000).toFixed(2), // 随机产生一个值
+          name: item.properties.name
+        }
+      })
+      console.log('data', data)
+      // 获取每个市的地理坐标值
+      res.features.forEach(item => {
+        geoCoordMap[item.properties.name] = item.properties.cp
+      })
+      console.log('geoCoordMap', geoCoordMap)
+
+      let convertData = function (data) {
+        let res = []
+        for (let i = 0; i < data.length; i++) {
+          let geoCoord = geoCoordMap[data[i].name]
+          if (geoCoord) {
+            res.push({
+              name: data[i].name,
+              value: geoCoord.concat(data[i].value)
+            })
+          }
+        }
+        return res
+      }
+      console.log(convertData(data))
+
+      echarts.registerMap('hubei', res) //设置地图
+      let option = {
+        tooltip: {},
+        geo: {
+          map: 'hubei'
+        },
+        series: [
+          {
+            name: '湖北',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData(data)
+          }
+        ]
+      }
+      myChart.setOption(option)
+    })
+  </script>
+</html>
