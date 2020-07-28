@@ -1,76 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    #main {
-      width: 400px;
-      height: 400px;
-      background: #ccc;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="main"></div>
-  <script src="js/echarts.min.js"></script>
-  <script>
-    var myChart = echarts.init(document.getElementById('main'))
-    var data = [100, 82, 80, 70, 65, 66, 60, 54, 50, 42, 40]
-    var option = {
-      color: ['#3398DB'],
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      yAxis: [{
-        type: 'value'
-      }],
-      dataZoom: [ //滑动条
-        {
-          // yAxisIndex: 0, //这里是从X轴的0刻度开始
-          // show: false, //是否显示滑动条，不影响使用
-          type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-          startValue: 0, // 从头开始。
-          endValue: 6 // 一次性展示6个。
-        }
-      ],
-      xAxis: [{
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', '测试', '测试1', '测试2', '测试3'],
-      }],
-      series: [{
-        name: '直接访问',
-        type: 'bar',
-        barWidth: '60%',
-        data: data
-      }]
-    };
-    myChart.setOption(option);
-    //通过定时器的方式刷新，改变statrValue，endValue
-    setInterval(function () {
-      // 每次向后滚动一个，最后一个从头开始。
-      if (option.dataZoom[0].endValue == data.length) {
-        option.dataZoom[0].endValue = 6;
-        option.dataZoom[0].startValue = 0;
-      } else {
-        option.dataZoom[0].endValue = option.dataZoom[0].endValue + 1;
-        option.dataZoom[0].startValue = option.dataZoom[0].startValue + 1;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #main {
+        width: 400px;
+        height: 400px;
+        background: #ccc;
       }
-      myChart.setOption(option);
-    }, 2000);
-  </script>
-</body>
+    </style>
+  </head>
 
+  <body>
+    <div id="main"></div>
+    <script src="js/echarts.min.js"></script>
+    <script>
+      var myChart = echarts.init(document.getElementById('main'))
+      var xData = ['一', '二', '三', '四', '五', '六', '七']
+      var yData = [30, 20, 10, 40, 80, 90, 50]
+      // 1.需要复制一份数据(和无缝滚动给的原理一样)
+      var newXData = xData.concat(xData) // x轴数据复制一份
+      var newYData = yData.concat(yData) // y轴数据复制一份
+      // 2.需要显示的个数
+      let start = 0,
+        end = 3
+      initChart(start, end)
+      // 初始化图表
+      // 自动轮播
+      setInterval(autoPlay, 2000)
+      function autoPlay() {
+        initChart(start, end)
+        start++
+        end++
+        if (start === 7) {
+          // 临界值的判断和轮播、滑动一样
+          start = 0
+          end = 4
+        }
+      }
+      function initChart(start, end) {
+        var option = {
+          color: ['#3398DB'],
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          yAxis: [
+            {
+              type: 'value'
+            }
+          ],
+          dataZoom: [
+            //滑动条
+            {
+              // yAxisIndex: 0, //这里是从X轴的0刻度开始
+              show: false, //是否显示滑动条，不影响使用
+              type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+              startValue: start, // 从头开始。
+              endValue: end // 一次性展示6个。
+            }
+          ],
+          xAxis: [
+            {
+              type: 'category',
+              data: newXData
+            }
+          ],
+          series: [
+            {
+              name: '直接访问',
+              type: 'bar',
+              barWidth: '60%',
+              data: newYData
+            }
+          ]
+        }
+        myChart.setOption(option)
+      }
+    </script>
+  </body>
 </html>
