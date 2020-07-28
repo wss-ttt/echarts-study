@@ -26,20 +26,22 @@
       // 2.需要显示的个数
       let start = 0,
         end = 3
+      // 3.初始化图表
       initChart(start, end)
-      // 初始化图表
-      // 自动轮播
+      // 4.自动轮播
       setInterval(autoPlay, 2000)
+      // 5.封装自动轮播方法
       function autoPlay() {
         initChart(start, end)
         start++
         end++
-        if (start === 7) {
+        if (start === newXData.length) {
           // 临界值的判断和轮播、滑动一样
           start = 0
-          end = 4
+          end = 3
         }
       }
+      // 6.封装图表初始化方法
       function initChart(start, end) {
         var option = {
           color: ['#3398DB'],
