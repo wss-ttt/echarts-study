@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      #main {
+        width: 800px;
+        height: 800px;
+        margin: auto;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main"></div>
+  </body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/echarts-wordcloud.js"></script>
+  <script>
+    var myChart = echarts.init(document.getElementById('main'))
+    var option = {
+      tooltip: {},
+      series: [
+        {
+          type: 'wordCloud',
+          gridSize: 2,
+          sizeRange: [12, 100], // 大小
+          rotationRange: [-90, 90], // 旋转角度范围
+          shape: 'pentagon',
+          width: 400,
+          height: 600,
+          drawOutOfBound: true,
+          textStyle: {
+            normal: {
+              color: function () {
+                return (
+                  'rgb(' +
+                  [
+                    Math.round(Math.random() * 255),
+                    Math.round(Math.random() * 255),
+                    Math.round(Math.random() * 255)
+                  ].join(',') +
+                  ')'
+                )
+              }
+            },
+            emphasis: {
+              shadowBlur: 10,
+              shadowColor: '#333'
+            }
+          },
+          //数据
+          data: [
+            { name: '好', value: '756' },
+            { name: '好好学习', value: '701' },
+            { name: '天天向上', value: '622' },
+            { name: 'HTML', value: '579' },
+            { name: '哈哈哈', value: '525' },
+            { name: 'CSS3', value: '479' },
+            { name: '今天天气很好', value: '443' },
+            { name: '搞笑啊', value: '386' },
+            { name: '可口可乐', value: '171' },
+            { name: '哈哈哈哈哈', value: '136' },
+            { name: 'VUE', value: '38' },
+            { name: '好', value: '756' },
+            { name: '好好学习', value: '701' },
+            { name: '天天向上', value: '622' },
+            { name: 'HTML', value: '579' },
+            { name: '哈哈哈', value: '525' },
+            { name: 'CSS3', value: '479' },
+            { name: '今天天气很好', value: '443' },
+            { name: '搞笑啊', value: '386' },
+            { name: '可口可乐', value: '171' },
+            { name: '哈哈哈哈哈', value: '136' },
+            { name: 'VUE', value: '38' }
+          ]
+        }
+      ]
+    }
+    myChart.setOption(option)
+    window.resize = myChart.resize
+  </script>
+</html>
