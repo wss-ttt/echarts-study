@@ -60,9 +60,21 @@
                 slient: true,
                 data: [
                     {
-                        yAxis: 700
+                        yAxis: 300,
+                        lineStyle: {
+                            color: 'red'
+                        }
+                    },
+                    {
+                        yAxis: 700,
+                        lineStyle: {
+                            color: 'green'
+                        }
                     }
-                ]
+                ],
+                label: {
+                    formatter: '{c} %'
+                }
             }
         }
     })
