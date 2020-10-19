@@ -57,7 +57,7 @@
       上海: [121.4648, 31.2891]
     }
     var chinaDatas = [
-      [
+      /* [
         {
           name: '黑龙江',
           value: 4
@@ -218,7 +218,7 @@
           name: '海南',
           value: 0
         }
-      ],
+      ], */
       [
         {
           name: '上海',
@@ -249,7 +249,7 @@
 
     var series = []
     ;[['北京市', chinaDatas]].forEach(function (item, i) {
-      console.log(item)
+      console.log('item', item)
       series.push(
         {
           type: 'lines',
@@ -358,11 +358,23 @@
       console.log(data) // 输出的是地图数据
       echarts.registerMap('chinatest', data) //设置地图
       let option = {
+        backgroundColor: '#013954',
         geo: {
           map: 'chinatest',
           label: {
             normal: {
+              color: '#fff',
               show: true
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: 'rgba(51, 69, 89, .5)', //地图背景色
+              borderColor: '#516a89', //省市边界线00fcff 516a89
+              borderWidth: 1
+            },
+            emphasis: {
+              color: 'rgba(37, 43, 61, .5)' //悬浮背景
             }
           }
         },
