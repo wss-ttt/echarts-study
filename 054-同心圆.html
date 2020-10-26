@@ -13,6 +13,7 @@
         /* width: 100%; */
         width: 500px;
         height: 800px;
+        margin: auto;
         background-color: #ccc;
       }
     </style>
@@ -44,14 +45,16 @@
       ]
     }
     var data = response.data
-    var colors = ['#CCA4F5', '#68C0EE', '#30D3D4']
+    // var colors = ['#CCA4F5', '#68C0EE', '#30D3D4']
+    var colors = ['red', 'green', 'blue']
     var radius = [
       ['45%', '51%'],
       ['60%', '66%'],
       ['75%', '81%']
     ]
-    var startAngle = [200, 300, 360]
-    var center = ['50%', '53%']
+    // var startAngle = [200, 300, 360]
+    var startAngle = [0, 0, 0]
+    var center = ['50%', '50%']
     var series = []
     var legendName = []
     var total = 0
@@ -77,6 +80,7 @@
         data: [
           {
             value: item.value,
+            // hoverAnimation: false, // 鼠标移入变大(false表示不变大)
             name: item.name,
             itemStyle: {
               color: this.colors[index]
@@ -84,13 +88,13 @@
           },
           {
             value: this.total - item.value,
-            hoverAnimation: false, // 鼠标移入变大
+            hoverAnimation: false, // 鼠标移入变大(false表示不变大)
             itemStyle: {
               normal: {
-                color: '#E4EAE9'
+                color: '#ddd'
               },
               emphasis: {
-                color: '#E4EAE9'
+                color: '#fff'
               }
             }
           }
@@ -105,7 +109,7 @@
         color: colors,
         legend: {
           orient: 'vertical',
-          top: '60%',
+          top: '10%',
           right: '3%',
           data: this.legendName,
           textStyle: {
