@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #main {
+        /* width: 100%; */
+        width: 500px;
+        height: 800px;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main"></div>
+  </body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script type="text/javascript">
+    // 后台返回的数据
+    var response = {
+      msg: '操作成功',
+      code: 200,
+      data: [
+        {
+          name: '待运维',
+          value: 43
+        },
+        {
+          name: '运维中',
+          value: 2
+        },
+        {
+          name: '已完结',
+          value: 7
+        }
+      ]
+    }
+    var data = response.data
+    var colors = ['#CCA4F5', '#68C0EE', '#30D3D4']
+    var radius = [
+      ['45%', '51%'],
+      ['60%', '66%'],
+      ['75%', '81%']
+    ]
+    var startAngle = [200, 300, 360]
+    var center = ['50%', '53%']
+    var series = []
+    var legendName = []
+    var total = 0
+    data.forEach((item, index) => {
+      if (item.value) {
+        legendName.push(item.name + item.value)
+      } else {
+        legendName.push(item.name)
+      }
+      total += item.value
+    })
+
+    data.forEach((item, index) => {
+      series.push({
+        name: legendName[index],
+        type: 'pie',
+        radius: radius[index],
+        center: center,
+        startAngle: startAngle[index],
+        clockWise: true, // 顺时加载
+        hoverAnimation: true,
+        hoverOffset: 3,
+        data: [
+          {
+            value: item.value,
+            name: item.name,
+            itemStyle: {
+              color: this.colors[index]
+            }
+          },
+          {
+            value: this.total - item.value,
+            hoverAnimation: false, // 鼠标移入变大
+            itemStyle: {
+              normal: {
+                color: '#E4EAE9'
+              },
+              emphasis: {
+                color: '#E4EAE9'
+              }
+            }
+          }
+        ]
+      })
+    })
+    initChart(series)
+    function initChart(series) {
+      let myCharts = null
+      myCharts = echarts.init(document.getElementById('main'))
+      let option = {
+        color: colors,
+        legend: {
+          orient: 'vertical',
+          top: '60%',
+          right: '3%',
+          data: this.legendName,
+          textStyle: {
+            color: '#000',
+            fontSize: 14,
+            padding: [0, 3, 0, 3]
+          },
+          itemWidth: 15,
+          itemHeight: 10,
+          itemGap: 8
+        },
+        series: series
+      }
+      myCharts.clear()
+      myCharts.setOption(option)
+      window.addEventListener('resize', () => {
+        myCharts.resize()
+      })
+    }
+  </script>
+</html>
