@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ECharts三维散点图</title>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/echarts-gl.min.js"></script>
+  <style>
+    #main {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main" style="width:800px;height:800px;margin: 0 auto;"></div>
+</body>
+<script>
+  let data = [
+    [
+      '张三',
+      10,
+      80
+    ],
+    [
+      '李四',
+      20,
+      70
+    ],
+    [
+      '王五',
+      90,
+      40
+    ],
+    [
+      '乔峰',
+      60,
+      90
+    ]
+  ]
+  let data2 = createData()
+  let data3 = createData()
+  let symbolSize = 2.5;
+  initChart()
+
+  function createData() {
+    let data = []
+    for (let i = 0; i < 20; i++) {
+      data.push([
+        'aa' + i,
+        getRandon(-100, 100),
+        getRandon(-100, 100)
+      ])
+    }
+    return data
+  }
+
+  function initChart() {
+    let myChart = echarts.init(document.getElementById('main'));
+    let option = {
+      tooltip: {},
+      xAxis3D: {
+        name: '时间',
+        type: 'category' // 为类目轴
+      },
+      yAxis3D: {
+        name: '误差',
+        type: 'value'
+      },
+      zAxis3D: {
+        name: '角差',
+        type: 'value'
+      },
+      grid3D: {},
+      visualMap: {
+        show: true,
+        dimension: 1,
+        pieces: [{
+          gt: 0,
+          lte: 50,
+          color: 'red'
+        }, {
+          gt: 50,
+          lte: 100,
+          color: 'green'
+        }],
+        outOfRange: {
+          color: '#999'
+        }
+      },
+      series: [{
+        type: 'scatter3D',
+        symbolSize: symbolSize,
+        data: data2
+      }, {
+        type: 'line3D',
+        symbolSize: symbolSize,
+        data: data3
+      }]
+    }
+    myChart.setOption(option);
+  }
+
+  function getRandon(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+</script>
+
+</html>
