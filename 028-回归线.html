@@ -2,146 +2,146 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .content {
-            width: 600px;
-            height: 600px;
-            padding: 15px;
-            background-color: cornsilk;
-            margin: 100px auto;
-            overflow: auto;
-        }
+    .content {
+      width: 600px;
+      height: 600px;
+      padding: 15px;
+      background-color: cornsilk;
+      margin: 100px auto;
+      overflow: auto;
+    }
 
-        .chart {
-            width: 100%;
-            height: 100%;
-            background-color: blanchedalmond;
-        }
+    .chart {
+      width: 100%;
+      height: 100%;
+      background-color: blanchedalmond;
+    }
 
-        .toolDiv {
-            color: red;
-            width: 100px;
-        }
-    </style>
+    .toolDiv {
+      color: red;
+      width: 100px;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="content">
-        <div class="chart"></div>
-    </div>
+  <div class="content">
+    <div class="chart"></div>
+  </div>
 </body>
 <script src="js/echarts.min.js"></script>
 <script src="js/ecStat.min.js"></script>
 <script>
+  var data1 = [
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    // [4, 4],
+    [4, 5],
+    [4, 6]
+  ]
+  var data2 = [
+    // [4, 7],
+    [4, 2],
+    [4, 10],
+    [7, 8],
+    [8, 9],
+    [9, 10]
+  ]
 
-    var data1 = [
-        [1, 2],
-        [2, 3],
-        [3, 4],
-        // [4, 4],
-        [4, 5],
-        [4, 6]
-    ]
-    var data2 = [
-        // [4, 7],
-        [4, 2],
-        [4, 10],
-        [7, 8],
-        [8, 9],
-        [9, 10]
-    ]
+  // See https://github.com/ecomfe/echarts-stat
+  var myRegression1 = ecStat.regression('exponential', data1);
 
-    // See https://github.com/ecomfe/echarts-stat
-    var myRegression1 = ecStat.regression('exponential', data1);
+  myRegression1.points.sort(function (a, b) {
+    return a[0] - b[0];
+  });
+  var myRegression2 = ecStat.regression('exponential', data2);
 
-    myRegression1.points.sort(function (a, b) {
-        return a[0] - b[0];
-    });
-    var myRegression2 = ecStat.regression('exponential', data2);
+  myRegression2.points.sort(function (a, b) {
+    return a[0] - b[0];
+  });
+  initChart()
 
-    myRegression2.points.sort(function (a, b) {
-        return a[0] - b[0];
-    });
-    initChart()
-    function initChart() {
-        let myCharts = null
-        let oBox = document.querySelector('.chart')
-        let seriesName = ['aa', 'aa-回归线', 'bb', 'bb-回归线']
-        let legendData = ['aa', 'bb']
-        myCharts = echarts.init(oBox)
-        let option = {
-            legend: {
-                right: 20,
-                top: 20,
-                data: legendData
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross'
-                },
-                formatter: function (params) {
-                    console.log(params)
-                    // 1 按照seriesType 进行分类
-                    let keyContainer = {}
-                    params.forEach(item => {
-                        keyContainer[item.seriesType] = keyContainer[item.seriesType] || []
-                        keyContainer[item.seriesType].push(item)
-                    })
-                    // 回归线分类
-                    let lineContainer = {}
-                    if (keyContainer['line']) {
-                        keyContainer['line'].forEach(item => {
-                            lineContainer[item.seriesName] = lineContainer[item.seriesName] || []
-                            lineContainer[item.seriesName].push(item)
-                        })
-                    }
-                    let scatterContainer = {}
-                    if (keyContainer['scatter']) {
-                        keyContainer['scatter'].forEach(item => {
-                            scatterContainer[item.seriesName] = scatterContainer[item.seriesName] || []
-                            scatterContainer[item.seriesName].push(item)
-                        })
-                    }
+  function initChart() {
+    let myCharts = null
+    let oBox = document.querySelector('.chart')
+    let seriesName = ['aa', 'aa-回归线', 'bb', 'bb-回归线']
+    let legendData = ['aa', 'bb']
+    myCharts = echarts.init(oBox)
+    let option = {
+      legend: {
+        right: 20,
+        top: 20,
+        data: legendData
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        },
+        formatter: function (params) {
+          console.log(params)
+          // 1 按照seriesType 进行分类
+          let keyContainer = {}
+          params.forEach(item => {
+            keyContainer[item.seriesType] = keyContainer[item.seriesType] || []
+            keyContainer[item.seriesType].push(item)
+          })
+          // 回归线分类
+          let lineContainer = {}
+          if (keyContainer['line']) {
+            keyContainer['line'].forEach(item => {
+              lineContainer[item.seriesName] = lineContainer[item.seriesName] || []
+              lineContainer[item.seriesName].push(item)
+            })
+          }
+          let scatterContainer = {}
+          if (keyContainer['scatter']) {
+            keyContainer['scatter'].forEach(item => {
+              scatterContainer[item.seriesName] = scatterContainer[item.seriesName] || []
+              scatterContainer[item.seriesName].push(item)
+            })
+          }
 
-                    let seriesName = []
-                    let res = []
-                    for (let [key, value] of Object.entries(scatterContainer)) {
-                        seriesName.push(key)
-                        let yValue = scatterContainer[key].map(item => {
-                            return item['value'][1]
-                        })
-                        let max = Math.max.apply(null, yValue)
-                        let min = Math.min.apply(null, yValue)
-                        res.push({
-                            name: key,
-                            min,
-                            max
-                        })
-                    }
-                    let regressionVal = []
-                    for (let [key, value] of Object.entries(lineContainer)) {
-                        regressionVal.push(lineContainer[key][0]['value'][1])
-                    }
-                    // 合并
-                    for (let i = 0; i < res.length; i++) {
-                        // 添加回归值
-                        res[i]['regression'] = regressionVal[i]
-                    }
-                    // console.log(res)
-                    let html = ''
-                    res.forEach(item => {
-                        html += `名称:${item['name']}
+          let seriesName = []
+          let res = []
+          for (let [key, value] of Object.entries(scatterContainer)) {
+            seriesName.push(key)
+            let yValue = scatterContainer[key].map(item => {
+              return item['value'][1]
+            })
+            let max = Math.max.apply(null, yValue)
+            let min = Math.min.apply(null, yValue)
+            res.push({
+              name: key,
+              min,
+              max
+            })
+          }
+          let regressionVal = []
+          for (let [key, value] of Object.entries(lineContainer)) {
+            regressionVal.push(lineContainer[key][0]['value'][1])
+          }
+          // 合并
+          for (let i = 0; i < res.length; i++) {
+            // 添加回归值
+            res[i]['regression'] = regressionVal[i]
+          }
+          // console.log(res)
+          let html = ''
+          res.forEach(item => {
+            html += `名称:${item['name']}
                         <br> 
                         最大值:${item['max']}
                         <br>
@@ -150,139 +150,139 @@
                         回归值:${item['regression']}
                         <br>
                         `
-                    })
-                    console.log(res)
-                    return html;
+          })
+          console.log(res)
+          return html;
+        }
+      },
+      xAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+        splitNumber: 20
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        }
+      },
+      series: [{
+          name: 'aa',
+          group: 'aa',
+          type: 'scatter',
+          label: {
+            emphasis: {
+              show: true,
+              position: 'left',
+              textStyle: {
+                color: 'blue',
+                fontSize: 16
+              }
+            }
+          },
+          data: data1
+        },
+        {
+          name: 'aa-回归线',
+          group: 'aa',
+          type: 'line',
+          showSymbol: false,
+          smooth: true,
+          data: regression(data1).points,
+          markPoint: {
+            itemStyle: {
+              normal: {
+                color: 'transparent'
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'left',
+                formatter: regression(data1).expression,
+                textStyle: {
+                  color: '#333',
+                  fontSize: 14
                 }
+              }
             },
-            xAxis: {
-                type: 'value',
-                splitLine: {
-                    lineStyle: {
-                        type: 'dashed'
-                    }
-                },
-                splitNumber: 20
+            data: [{
+              coord: regression(data1).points[regression(data1).points.length - 1]
+            }]
+          }
+        },
+        {
+          name: 'bb',
+          group: 'bb',
+          type: 'scatter',
+          label: {
+            emphasis: {
+              show: true,
+              position: 'left',
+              textStyle: {
+                color: 'blue',
+                fontSize: 16
+              }
+            }
+          },
+          data: data2
+        },
+        {
+          name: 'bb-回归线',
+          group: 'bb',
+          type: 'line',
+          showSymbol: false,
+          smooth: true,
+          data: regression(data2).points,
+          markPoint: {
+            itemStyle: {
+              normal: {
+                color: 'transparent'
+              }
             },
-            yAxis: {
-                type: 'value',
-                splitLine: {
-                    lineStyle: {
-                        type: 'dashed'
-                    }
+            label: {
+              normal: {
+                show: true,
+                position: 'left',
+                formatter: regression(data2).expression,
+                textStyle: {
+                  color: '#333',
+                  fontSize: 14
                 }
+              }
             },
-            series: [
-                {
-                    name: 'aa',
-                    group: 'aa',
-                    type: 'scatter',
-                    label: {
-                        emphasis: {
-                            show: true,
-                            position: 'left',
-                            textStyle: {
-                                color: 'blue',
-                                fontSize: 16
-                            }
-                        }
-                    },
-                    data: data1
-                },
-                {
-                    name: 'aa-回归线',
-                    group: 'aa',
-                    type: 'line',
-                    showSymbol: false,
-                    smooth: true,
-                    data: regression(data1).points,
-                    markPoint: {
-                        itemStyle: {
-                            normal: {
-                                color: 'transparent'
-                            }
-                        },
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'left',
-                                formatter: regression(data1).expression,
-                                textStyle: {
-                                    color: '#333',
-                                    fontSize: 14
-                                }
-                            }
-                        },
-                        data: [{
-                            coord: regression(data1).points[regression(data1).points.length - 1]
-                        }]
-                    }
-                },
-                {
-                    name: 'bb',
-                    group: 'bb',
-                    type: 'scatter',
-                    label: {
-                        emphasis: {
-                            show: true,
-                            position: 'left',
-                            textStyle: {
-                                color: 'blue',
-                                fontSize: 16
-                            }
-                        }
-                    },
-                    data: data2
-                },
-                {
-                    name: 'bb-回归线',
-                    group: 'bb',
-                    type: 'line',
-                    showSymbol: false,
-                    smooth: true,
-                    data: regression(data2).points,
-                    markPoint: {
-                        itemStyle: {
-                            normal: {
-                                color: 'transparent'
-                            }
-                        },
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'left',
-                                formatter: regression(data2).expression,
-                                textStyle: {
-                                    color: '#333',
-                                    fontSize: 14
-                                }
-                            }
-                        },
-                        data: [{
-                            coord: regression(data2).points[regression(data2).points.length - 1]
-                        }]
-                    }
-                }]
-        };
+            data: [{
+              coord: regression(data2).points[regression(data2).points.length - 1]
+            }]
+          }
+        }
+      ]
+    };
 
 
 
-        myCharts.clear()
-        myCharts.setOption(option)
-        window.addEventListener('resize', () => {
-            myCharts.resize()
-        })
-    }
+    myCharts.clear()
+    myCharts.setOption(option)
+    window.addEventListener('resize', () => {
+      myCharts.resize()
+    })
+  }
 
-    function regression(data) {
-        let myRegression = ecStat.regression('exponential', data)
-        myRegression.points.sort(function (a, b) {
-            return a[0] - b[0]
-        })
-        // return myRegression.points
-        console.log('myRegression', myRegression)
-        return myRegression
-    }
+  function regression(data) {
+    let myRegression = ecStat.regression('exponential', data)
+    myRegression.points.sort(function (a, b) {
+      return a[0] - b[0]
+    })
+    // return myRegression.points
+    console.log('myRegression', myRegression)
+    return myRegression
+  }
 </script>
 
 </html>
