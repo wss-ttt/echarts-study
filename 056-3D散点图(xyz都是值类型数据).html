@@ -7,7 +7,6 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/echarts.min.js"></script>
   <script src="js/echarts-gl.min.js"></script>
-  <script src="js/ecStat.min.js"></script>
 </head>
 
 <body>
@@ -23,8 +22,6 @@
     [50, 60, 70]
   ];
   var data2 = createData()
-  var myRegression1 = ecStat.regression('exponential', data);
-  console.log('myRegression1', myRegression1)
   initChart();
 
   function createData() {
@@ -81,57 +78,31 @@
 
       series: [{
         type: 'line3D', // 这个地方也可以写scatter3D
-        // dimensions: ['aaa', 'bbb', 'ccc'],
+        dimensions: ['aaa', 'bbb', 'ccc' //显示框信息
+        ],
         //                encode: {
-        // x: [3, 1, 5], // 表示维度 3、1、5 映射到 x 轴。
-        // y: 2, // 表示维度 2 映射到 y 轴。
+        x: [3, 1, 5], // 表示维度 3、1、5 映射到 x 轴。
+        y: 2, // 表示维度 2 映射到 y 轴。
         //                    tooltip:['a','c','b'], // 表示维度 3、2、4 会在 tooltip 中显示。
         //                    label: 'a'           // 表示 label 使用维度 3。
         //                },
-        data: data,
-        // symbolSize: 2, //点的大小
-        // // symbol: 'triangle',
-        // itemStyle: {
-        //   borderWidth: 1,
-        //   borderColor: 'rgba(255,255,255,0.8)' //边框样式
-        // },
-        // emphasis: {
-        //   itemStyle: {
-        //     color: '#ccc' //高亮
-        //   }
-        // },
-        // itemStyle: {
-        //   color: "#f00"
-        // }
-      }, {
-        name: 'aa-回归线',
-        group: 'aa',
-        type: 'line',
-        showSymbol: false,
-        smooth: true,
-        data: myRegression1.points,
-        markPoint: {
+        data: data2,
+        symbolSize: 2, //点的大小
+        // symbol: 'triangle',
+        itemStyle: {
+          borderWidth: 1,
+          borderColor: 'rgba(255,255,255,0.8)' //边框样式
+        },
+        emphasis: {
           itemStyle: {
-            normal: {
-              color: 'transparent'
-            }
-          },
-          label: {
-            normal: {
-              show: true,
-              position: 'left',
-              formatter: myRegression1.expression,
-              textStyle: {
-                color: '#333',
-                fontSize: 14
-              }
-            }
-          },
-          data: [{
-            coord: myRegression1.points[myRegression1.points.length - 1]
-          }]
+            color: '#ccc' //高亮
+          }
+        },
+        itemStyle: {
+          color: "#f00"
         }
-      }]
+      }],
+      backgroundColor: "#fff"
     });
   }
 </script>
