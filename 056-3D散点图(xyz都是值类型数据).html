@@ -40,19 +40,19 @@
     myChart.setOption({
       tooltip: {},
       xAxis3D: {
-        name: "x",
+        name: 'x',
         type: 'value',
         min: 'dataMin', //获取数据中的最值
         max: 'dataMax'
       },
       yAxis3D: {
-        name: "y",
+        name: 'y',
         type: 'value',
         min: 'dataMin',
         max: 'dataMax'
       },
       zAxis3D: {
-        name: "z",
+        name: 'z',
         type: 'value',
         min: 'dataMin',
         max: 'dataMax'
@@ -77,32 +77,22 @@
       },
 
       series: [{
-        type: 'line3D', // 这个地方也可以写scatter3D
-        dimensions: ['aaa', 'bbb', 'ccc' //显示框信息
-        ],
-        //                encode: {
-        x: [3, 1, 5], // 表示维度 3、1、5 映射到 x 轴。
-        y: 2, // 表示维度 2 映射到 y 轴。
-        //                    tooltip:['a','c','b'], // 表示维度 3、2、4 会在 tooltip 中显示。
-        //                    label: 'a'           // 表示 label 使用维度 3。
-        //                },
-        data: data2,
-        symbolSize: 2, //点的大小
-        // symbol: 'triangle',
+        type: 'scatter3D', // 这个地方也可以写scatter3D
+        data: data,
+        symbolSize: 10, //点的大小
+        symbol: 'triangle',
         itemStyle: {
           borderWidth: 1,
-          borderColor: 'rgba(255,255,255,0.8)' //边框样式
+          borderColor: 'rgba(0,0,0,0.8)', //边框样式
+          color: '#f00'
         },
         emphasis: {
           itemStyle: {
             color: '#ccc' //高亮
           }
-        },
-        itemStyle: {
-          color: "#f00"
         }
       }],
-      backgroundColor: "#fff"
+      backgroundColor: '#fff'
     });
   }
 </script>
