@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+    }
+
+    .container>div {
+      flex: 1;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="bar"></div>
+    <div class="scatter"></div>
+  </div>
+
+  <script src="js/echarts.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/echarts-gl.min.js"></script>
+  <script>
+    const barEle = document.querySelector('.bar')
+    const scatterEle = document.querySelector('.scatter');
+    const myChartBar = echarts.init(barEle);
+    const myChartScatter = echarts.init(scatterEle);
+    let symbolSize = 5;
+    let seriesBar = [];
+    let seriesScatter = [];
+    let testData = [
+      [
+        'A相',
+        10,
+        10
+      ],
+      [
+        'B相',
+        20,
+        20
+      ],
+      [
+        'C相',
+        30,
+        30
+      ]
+    ]
+    let testData2 = [
+      [
+        'A相',
+        150,
+        150
+      ],
+      [
+        'B相',
+        60,
+        60
+      ],
+      [
+        'C相',
+        70,
+        70
+      ]
+    ]
+    // 模拟数据
+    let responseData = []
+    for (let i = 0; i < 3; i++) {
+      let a = ['A相', Math.round(Math.random() * 100), Math.round(Math.random() * 100)];
+      let b = ['B相', Math.round(Math.random() * 100), Math.round(Math.random() * 100)];
+      let c = ['C相', Math.round(Math.random() * 100), Math.round(Math.random() * 100)];
+      responseData.push(
+        [a, b, c]
+      )
+    }
+    console.log('responseData', responseData);
+    // 组装series
+    responseData.forEach((item, index) => {
+      seriesBar.push({
+        name: '线路' + index,
+        type: 'scatter3D', // scatter3D
+        symbolSize: symbolSize,
+        data: item
+      })
+      seriesScatter.push({
+        name: '线路' + index,
+        type: 'bar3D', // bar3D
+        symbolSize: symbolSize,
+        data: item
+      })
+    })
+    initChartBar();
+    initChartScatter();
+
+    function initChartBar() {
+      let option = {
+        tooltip: {},
+        legend: {},
+        xAxis3D: {
+          name: 'X: 相序',
+          type: 'category' // 为类目轴
+        },
+        yAxis3D: {
+          name: 'Y: 角差',
+          type: 'value'
+        },
+        zAxis3D: {
+          name: 'Z: 基波频率',
+          type: 'value'
+        },
+        grid3D: {},
+        /* visualMap: {
+          show: true,
+          dimension: 1,
+          pieces: [{
+            gt: 0,
+            lte: 50,
+            color: 'red'
+          }, {
+            gt: 50,
+            lte: 100,
+            color: 'green'
+          }],
+          outOfRange: {
+            color: '#999'
+          }
+        }, */
+        /* series: [{
+          name: '一线',
+          type: 'bar3D',
+          symbolSize: symbolSize,
+          data: testData
+        }, {
+          name: '二线',
+          type: 'bar3D',
+          symbolSize: symbolSize,
+          data: testData2
+        }] */
+        series: seriesBar
+      }
+      myChartBar.setOption(option);
+    }
+
+    function initChartScatter() {
+      let option = {
+        tooltip: {},
+        legend: {},
+        xAxis3D: {
+          name: 'X: 相序',
+          type: 'category' // 为类目轴
+        },
+        yAxis3D: {
+          name: 'Y: 角差',
+          type: 'value'
+        },
+        zAxis3D: {
+          name: 'Z: 基波频率',
+          type: 'value'
+        },
+        grid3D: {},
+        /* visualMap: {
+          show: true,
+          dimension: 1,
+          pieces: [{
+            gt: 0,
+            lte: 50,
+            color: 'red'
+          }, {
+            gt: 50,
+            lte: 100,
+            color: 'green'
+          }],
+          outOfRange: {
+            color: '#999'
+          }
+        }, */
+        /* series: [{
+          name: '一线',
+          type: 'bar3D',
+          symbolSize: symbolSize,
+          data: testData
+        }, {
+          name: '二线',
+          type: 'bar3D',
+          symbolSize: symbolSize,
+          data: testData2
+        }] */
+        series: seriesScatter
+      }
+      myChartScatter.setOption(option);
+    }
+
+    // 获取数据
+    function getData(url) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: url,
+          type: 'get',
+          success: function (res) {
+            console.log('res')
+          }
+        })
+      })
+    }
+
+    function getRandon(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+  </script>
+</body>
+
+</html>
