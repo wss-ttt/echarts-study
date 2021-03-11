@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      width: 800px;
+      height: 600px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>给区域和散点绑定业务数据</h2>
+  <div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+  let myChart = echarts.init(document.getElementById('main'))
+
+  init();
+
+  function init() {
+    $.get('mapdata/hubei.json', function (res) {
+      let geoCoordMap = {}
+      let data = res.features.map(item => {
+        // 显示窗口的数据转换
+        return {
+          id: item.id,
+          value: +(Math.random() * 10).toFixed(2), // 随机产生一个值
+          name: item.properties.name
+        }
+      })
+      // 获取每个市的地理坐标值
+      res.features.forEach(item => {
+        geoCoordMap[item.properties.name] = item.properties.cp
+      })
+      console.log('data', data)
+      let convertData = function (data) {
+        let res = []
+        for (let i = 0; i < data.length; i++) {
+          let geoCoord = geoCoordMap[data[i].name]
+          if (geoCoord) {
+            res.push({
+              id: data[i].id,
+              name: data[i].name,
+              value: geoCoord.concat(data[i].value)
+            })
+          }
+        }
+        return res
+      }
+      console.log('convertData', convertData(data))
+      initMap('hubei', res, convertData(data))
+    })
+  }
+
+
+  // 初始化地图
+  function initMap(name, geoData, bussinessData) {
+    echarts.registerMap(name, geoData) //设置地图
+    let option = {
+      tooltip: {},
+      // 地图配置
+      geo: {
+        map: name
+      },
+      // series这个属性是可有可无的
+      series: [{
+        type: 'map',
+        mapType: name,
+        data: bussinessData, // 给地图区域绑定业务数据
+        // 都可以单独配置
+        tooltip: {
+          show: true,
+          formatter: params => {
+            return '业务数据:' + '我的名字是' + params.data.name
+          }
+        }
+      }, {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        data: bussinessData, // 给地图上的散点绑定业务数据
+        // 都可以单独配置
+        tooltip: {
+          show: true,
+          formatter: params => {
+            return '业务数据:' + params.data.value[2]
+          }
+        }
+      }]
+    }
+    myChart.setOption(option)
+    // 添加单击事件
+    myChart.on('click', function(params) {
+      console.log('params', params);
+    })
+  }
+</script>
+
+</html>
