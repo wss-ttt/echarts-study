@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 800px;
+      height: 600px;
+      background-color: #ccc;
+      position: relative;
+    }
+    #main {
+      width: 100%;
+      height: 100%;
+    }
+    .back {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>地图下钻</h2>
+  <div class="container">
+    <div id="main"></div>
+    <div class="back">返回</div>
+  </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+  let oBox = document.getElementById('main')
+  let myChart = null
+  let arr = ['420000']
+  init();
+
+  function init() {
+    initMap('420000');
+  }
+
+  // 初始化地图
+  function initMap(name) {
+    getData(name).then(res => {
+      // console.log('res', res)
+      let data = res.features.map(item => {
+        // 显示窗口的数据转换
+        return {
+          id: item.id || item.properties.adcode,
+          value: +(Math.random() * 10).toFixed(2), // 随机产生一个值
+          name: item.properties.name
+        }
+      })
+      initChart(name, res, data)
+    })
+  }
+
+  function getData(name) {
+    return new Promise((resolve, reject) => {
+      $.get('mapdata/' + name + '.json', function (res) {
+        resolve(res)
+      })
+    })
+  }
+
+  // 初始化地图
+  function initChart(name, geoData, bussinessData) {
+    if (myChart) {
+      myChart.dispose(); // 销毁实例 这个地方必须销毁实例,否则后面单击事件时会执行两边
+    }
+    myChart = echarts.init(oBox);
+    echarts.registerMap(name, geoData) //设置地图
+    let option = {
+      // geo: {}, // geo配置可以不需要
+      tooltip: {},
+      series: [{
+        type: 'map',
+        mapType: name,
+        data: bussinessData, // 给地图区域绑定业务数据
+        // 都可以单独配置
+        tooltip: {
+          show: true,
+          formatter: params => {
+            return '业务数据:' + '我的名字是' + params.data.name
+          }
+        },
+        label: {
+          normal: {
+            show: true
+          }
+        }
+      }]
+    }
+    myChart.setOption(option)
+    // 添加单击事件
+    myChart.on('click', function (params) {
+      arr.push(params.data.id + '')
+      initMap(params.data.id)
+    })
+  }
+
+  // 返回操作
+  $('.back').on('click', function() {
+    if(arr.length === 1) {
+      $('.back').html('不能再返回了')
+      return
+    }
+    arr.pop() // 删除最后一个元素
+    initMap(arr[arr.length - 1])
+  })
+
+</script>
+
+</html>
