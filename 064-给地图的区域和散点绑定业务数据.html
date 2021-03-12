@@ -25,6 +25,12 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/echarts.min.js"></script>
 <script type="text/javascript">
+  /***
+   *  问题注意:
+   *  1.在初始化地图的时候,可以使用geo属性来初始化地图,也可以使用series来初始化地图
+   *  2.如果想在地图上显示散点出来,得添加geo属性 
+   * **/
+
   let myChart = echarts.init(document.getElementById('main'))
 
   init();
@@ -101,7 +107,7 @@
     }
     myChart.setOption(option)
     // 添加单击事件
-    myChart.on('click', function(params) {
+    myChart.on('click', function (params) {
       console.log('params', params);
     })
   }
