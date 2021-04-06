@@ -65,17 +65,6 @@
     })
   }
 
-  // See https://github.com/ecomfe/echarts-stat
-  var myRegression1 = ecStat.regression('exponential', data1);
-
-  myRegression1.points.sort(function (a, b) {
-    return a[0] - b[0];
-  });
-  var myRegression2 = ecStat.regression('exponential', data2);
-
-  myRegression2.points.sort(function (a, b) {
-    return a[0] - b[0];
-  });
   initChart()
 
   function initChart() {
@@ -183,6 +172,21 @@
       return a[0] - b[0]
     })
     return myRegression
+  }
+
+  // 测试代码
+  function test() {
+    // See https://github.com/ecomfe/echarts-stat
+    var myRegression1 = ecStat.regression('exponential', data1);
+
+    myRegression1.points.sort(function (a, b) {
+      return a[0] - b[0];
+    });
+    var myRegression2 = ecStat.regression('exponential', data2);
+
+    myRegression2.points.sort(function (a, b) {
+      return a[0] - b[0];
+    });
   }
 </script>
 
