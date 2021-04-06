@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .content {
+      width: 600px;
+      height: 600px;
+      padding: 15px;
+      background-color: cornsilk;
+      margin: 100px auto;
+      overflow: auto;
+    }
+
+    .chart {
+      width: 100%;
+      height: 100%;
+      background-color: blanchedalmond;
+    }
+
+    .toolDiv {
+      color: red;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="chart"></div>
+  </div>
+</body>
+<script src="js/echarts.min.js"></script>
+<script src="js/ecStat.min.js"></script>
+<script>
+  var data1 = [
+    [1, 2, 3, 4],
+    [1, 2, 3, 4], // 重复的点
+    [2, 3, 5, 6],
+    [3, 4, 7, 8],
+    [4, 5, 9, 10],
+    [4, 6, 11, 23],
+    [5, 7, 9, 12]
+  ]
+
+  // 自定义数据
+  var data2 = []
+  for (var i = 0; i < data1.length; i++) {
+    var temp = data1[i]
+    data2.push({
+      value: [temp[0], temp[1]],
+      min: temp[2], // 自定义数据min
+      max: temp[3], // 自定义数据max
+      msg: Math.round(Math.random() * 100) // 自定义数据msg
+    })
+  }
+
+  // See https://github.com/ecomfe/echarts-stat
+  var myRegression1 = ecStat.regression('exponential', data1);
+
+  myRegression1.points.sort(function (a, b) {
+    return a[0] - b[0];
+  });
+  var myRegression2 = ecStat.regression('exponential', data2);
+
+  myRegression2.points.sort(function (a, b) {
+    return a[0] - b[0];
+  });
+  initChart()
+
+  function initChart() {
+    let myCharts = null
+    let oBox = document.querySelector('.chart')
+    let legendData = ['aa', 'aa-回归线']
+    myCharts = echarts.init(oBox)
+    let option = {
+      legend: {
+        data: legendData
+      },
+      tooltip: {
+        trigger: 'item',
+        axisPointer: {
+          type: 'cross'
+        },
+        formatter: function (params) {
+          console.log('params', params)
+          let html = ''
+          // 此处的componentType 有可能位 'markPoint', 所以此处需要添加上判断
+          if (params.componentType === 'series') {
+            html += `最大值: ${params.data.value[0]}<br>最小值: ${params.data.value[1]}<br>消息:${params.data.msg}`
+          }
+          return html
+        }
+      },
+      xAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+        splitNumber: 20
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        }
+      },
+      series: [{
+          name: 'aa',
+          group: 'aa',
+          type: 'scatter',
+          label: {
+            emphasis: {
+              show: true,
+              position: 'left',
+              textStyle: {
+                color: 'blue',
+                fontSize: 16
+              }
+            }
+          },
+          data: data2
+        },
+        {
+          name: 'aa-回归线',
+          group: 'aa',
+          type: 'line',
+          showSymbol: false,
+          smooth: true,
+          data: regression(data1).points,
+          markPoint: {
+            itemStyle: {
+              normal: {
+                // color: 'transparent'
+                color: 'red'
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'left',
+                formatter: regression(data1).expression,
+                textStyle: {
+                  color: '#333',
+                  fontSize: 14
+                }
+              }
+            },
+            data: [{
+              coord: regression(data1).points[regression(data1).points.length - 1]
+            }]
+          }
+        },
+      ]
+    };
+
+
+
+    myCharts.clear()
+    myCharts.setOption(option)
+    window.addEventListener('resize', () => {
+      myCharts.resize()
+    })
+  }
+
+  function regression(data) {
+    let myRegression = ecStat.regression('exponential', data)
+    myRegression.points.sort(function (a, b) {
+      return a[0] - b[0]
+    })
+    return myRegression
+  }
+</script>
+
+</html>
