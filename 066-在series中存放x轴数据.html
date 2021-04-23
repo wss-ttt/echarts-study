@@ -58,10 +58,10 @@
         }
       },
       xAxis: {
-        type: 'category',
+        type: 'category', // 这个属性不能少 否则图表显示不出来
       },
       yAxis: {
-        type: 'value'
+        type: 'value' // 这个属性可以不写 因为y轴 默认的 type就是 'value'类型的
       },
       series: [{
         data: data,
