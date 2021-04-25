@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      width: 800px;
+      height: 500px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main"></div>
+  <button type="button">高亮</button>
+</body>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  let myChart = null;
+  let xData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  let yData = [120, 200, 150, 80, 70, 110, 130];
+
+  initChart();
+
+  function initChart() {
+    if (!myChart) {
+      myChart = echarts.init(document.getElementById('main'));
+    }
+    var option = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        },
+        /* formatter: params => {
+          console.log('params', params);
+        } */
+      },
+      xAxis: {
+        type: 'category',
+        data: xData
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: yData,
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(220, 220, 220, 0.8)'
+        },
+        // 高亮的样式
+        emphasis: {
+          itemStyle: {
+            color: '#1acd7e'
+          }
+        }
+      }, {
+        data: [30, 40, 50, 60, 70, 80, 90],
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(220, 220, 220, 0.8)'
+        },
+        // 高亮的样式
+        emphasis: {
+          itemStyle: {
+            color: '#fb3'
+          }
+        }
+      }]
+    };
+
+    myChart.setOption(option);
+  }
+
+  let btns = document.querySelectorAll('button');
+  // 手动高亮柱状图
+  btns[0].onclick = function () {
+    myChart.dispatchAction({
+      type: 'highlight', // 高亮
+      dataIndex: 0 // 不添加该dataIndex属性，就会高亮所有的
+    });
+  }
+  let index = 0
+  let timer = null;
+  timer = setInterval(autoPlay, 1000);
+
+  // 自动轮播高亮柱状图
+  function autoPlay() {
+    // 高亮和取消高亮不需要设置seriesIndex属性值
+    myChart.dispatchAction({
+      type: 'downplay', // 取消高亮
+    });
+    // 第一个series高亮
+    myChart.dispatchAction({
+      type: 'highlight', // 高亮
+      seriesIndex: 0,
+      dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
+    });
+    // 第二个series高亮
+    myChart.dispatchAction({
+      type: 'highlight', // 高亮
+      seriesIndex: 1,
+      dataIndex: index // 不添加该dataIndex属性，就会高亮所有的
+    });
+
+    index++;
+    if (index === yData.length) {
+      index = 0;
+    }
+  }
+  // 移入操作-停止自动轮播效果
+  myChart.on('mouseover', function (params) {
+    clearInterval(timer);
+  })
+  // 移除操作-开启自动轮播效果
+  myChart.on('mouseout', function (params) {
+    timer = setInterval(autoPlay, 1000);
+  })
+</script>
+
+</html>
