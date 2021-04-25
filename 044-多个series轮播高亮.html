@@ -98,9 +98,13 @@
 
   // 自动轮播高亮柱状图
   function autoPlay() {
-    // 高亮和取消高亮不需要设置seriesIndex属性值
     myChart.dispatchAction({
       type: 'downplay', // 取消高亮
+      seriesIndex: 0 // 第一个series
+    });
+    myChart.dispatchAction({
+      type: 'downplay', // 取消高亮
+      seriesIndex: 1 // 第二个series
     });
     // 第一个series高亮
     myChart.dispatchAction({
