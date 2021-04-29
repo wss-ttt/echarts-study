@@ -138,6 +138,7 @@
             },
           },
           formatter: function (params) {
+            // 前3名颜色进行状态颜色区分
             var index = datas.map((item) => item.name).indexOf(params);
             index = index + 1;
             if (index - 1 < 3) {
