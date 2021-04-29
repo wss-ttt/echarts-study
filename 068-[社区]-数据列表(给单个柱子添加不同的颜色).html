@@ -24,7 +24,8 @@
 
 <body>
   <div id="main"></div>
-  <script src="js/echarts.min.js"></script>
+  <!-- 此案例:需要使用v4的高版本 -->
+  <script src="js/echarts - v4.9.0.js"></script>
   <script>
     const oBox = document.getElementById('main')
     let myChart = echarts.init(oBox)
@@ -96,7 +97,56 @@
             margin: 30
           }
         },
-        data: datas.map(item => item.name)
+        data: datas.map(item => item.name),
+        axisLabel: {
+          margin: 100,
+          fontSize: 14,
+          align: 'left',
+          color: '#333',
+          rich: {
+            a1: {
+              color: '#fff',
+              backgroundColor: colorList[0],
+              width: 30,
+              height: 30,
+              align: 'center',
+              borderRadius: 2,
+            },
+            a2: {
+              color: '#fff',
+              backgroundColor: colorList[1],
+              width: 30,
+              height: 30,
+              align: 'center',
+              borderRadius: 2,
+            },
+            a3: {
+              color: '#fff',
+              backgroundColor: colorList[2],
+              width: 30,
+              height: 30,
+              align: 'center',
+              borderRadius: 2,
+            },
+            b: {
+              color: '#fff',
+              backgroundColor: colorList[3],
+              width: 30,
+              height: 30,
+              align: 'center',
+              borderRadius: 2,
+            },
+          },
+          formatter: function (params) {
+            var index = datas.map((item) => item.name).indexOf(params);
+            index = index + 1;
+            if (index - 1 < 3) {
+              return ['{a' + index + '|' + index + '}' + '  ' + params].join('\n');
+            } else {
+              return ['{b|' + index + '}' + '  ' + params].join('\n');
+            }
+          },
+        },
       }, {
         type: 'category',
         inverse: true,
