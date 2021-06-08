@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      width: 800px;
+      height: 800px;
+      background-color: #ccc;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/echarts-gl.min.js"></script>
+<script src="mapdata/hubei.js"></script>
+<script type="text/javascript">
+  // 1.需要引入echarts-gl.min.js这个文件
+  // 2.geo属性需要改成 -> geo3D属性 即可
+  var myChart = echarts.init(document.getElementById('main'))
+  myChart.setOption({
+    geo3D: {
+      map: '湖北',
+    }
+  })
+</script>
+
+</html>

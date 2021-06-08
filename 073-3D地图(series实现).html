@@ -27,9 +27,8 @@
 <script src="js/echarts-gl.min.js"></script>
 <script src="mapdata/hubei.js"></script>
 <script type="text/javascript">
-  /**
-  3D地图: 和平面的地方配置差不多, 有一点需要引入 echarts-gl.min.js这个文件
-  **/
+  // 1.需要引入echarts-gl.min.js 这个文件
+  // 2.type: 'map' 修改为 type: 'map3D' 即可
   var myChart = echarts.init(document.getElementById('main'))
   myChart.setOption({
     series: [{
