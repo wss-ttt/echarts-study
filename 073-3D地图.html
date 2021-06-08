@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      width: 800px;
+      height: 800px;
+      background-color: #ccc;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/echarts-gl.min.js"></script>
+<script src="mapdata/hubei.js"></script>
+<script type="text/javascript">
+  /**
+  3D地图: 和平面的地方配置差不多, 有一点需要引入 echarts-gl.min.js这个文件
+  **/
+  var myChart = echarts.init(document.getElementById('main'))
+  myChart.setOption({
+    series: [{
+      type: 'map3D',
+      map: '湖北',
+      label: { // 标签的相关设置
+        show: true, // (地图上的城市名称)是否显示标签 [ default: false ]
+        // distance: 5, // 标签距离图形的距离，在三维的散点图中这个距离是屏幕空间的像素值，其它图中这个距离是相对的三维距离
+        //formatter:, // 标签内容格式器
+        textStyle: { // 标签的字体样式
+          color: '#ffffff', // 地图初始化区域字体颜色
+          fontSize: 14, // 字体大小
+          opacity: 1, // 字体透明度
+          backgroundColor: 'rgba(0,23,11,0.5)' // 字体背景色
+        },
+        // normal:{
+        //   show:true,
+        //   formatter:function(params){ //标签内容
+        //     // console.log(params)
+        //     return  params.name;
+        //   },
+        //   // lineHeight: 20,
+        //   backgroundColor:'rgba(255,255,255,.9)',
+        //   borderColor:'#80cffd',
+        //   borderWidth:'1',
+        //   padding:[5,15,4],
+        //   color:'#000000',
+        //   fontSize: 12,
+        //   fontWeight:'normal',
+        // },
+        emphasis: {
+          show: true
+        }
+      },
+      itemStyle: { // 三维地理坐标系组件 中三维图形的视觉属性，包括颜色，透明度，描边等。
+        // areaColor: 'rgba(95,158,160,0.5)', // 地图板块的颜色
+        areaColor: '#10786c', // 地图板块的颜色
+        // opacity: 0.3, // 图形的不透明度 [ default: 1 ]
+        borderWidth: 1, // (地图板块间的分隔线)图形描边的宽度。加上描边后可以更清晰的区分每个区域 [ default: 0 ]
+        borderColor: 'red' // 图形描边的颜色。[ default: #333 ]
+      },
+      tooltip: { //提示框组件。
+        alwaysShowContent: true,
+        hoverAnimation: true,
+        trigger: 'item', //触发类型 散点图
+        enterable: true, //鼠标是否可进入提示框
+        transitionDuration: 1, //提示框移动动画过渡时间
+        triggerOn: 'click',
+        formatter: function (params) {
+          // console.log(params.name, 'params.name')
+          if (params.name) {
+            var str = `
+                  <div class="map-tooltip">
+                    <div class="city-name">${params.name}</div>
+                    <div class="city-info">志愿者人数：<span class="city-num">${params.data.volunteerNumber}</span></div>
+                    <div class="city-info">活动总数：<span class="city-num">${params.data.taskNumber}</span></div>
+                  </div>
+                  `
+            return str;
+          }
+        },
+        // backgroundColor: 'rgba(30, 54, 124,1)',
+        // backgroundColor: '#01FEDD',
+        borderWidth: '1px',
+        borderRadius: '4',
+        borderColor: '#00B2AC',
+        textStyle: {
+          color: 'rgba(255,255,255,1)'
+        },
+        padding: [5, 10]
+      },
+    }]
+  })
+</script>
+
+</html>
