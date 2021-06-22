@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#main {
+			width: 800px;
+			height: 800px;
+			background-color: #ccc;
+			margin: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts - v4.9.0.js"></script>
+<script src="js/echarts-gl.min.js"></script>
+<script src="mapdata/china.js"></script>
+<script type="text/javascript">
+	// 1.需要引入echarts-gl.min.js这个文件
+	// 2.geo属性需要改成 -> geo3D属性 即可
+	var myChart = echarts.init(document.getElementById('main'))
+
+	$.get('mapdata/china.json', function (data) {
+		echarts.registerMap('china', data) //设置地图
+		var center = []
+		// 获取每个区域的经纬度值 ,该值存放于geojson数据中的properties.cp中
+		var pointArr = data.features.map(item => {
+			// 获取中心点的经纬度
+			if (item.properties.name === '广东') {
+				center = item.properties.cp
+			}
+			return {
+				value: item.properties.cp,
+				itemStyle: {
+					color: '#96cc34'
+				}
+			}
+		})
+
+		// 迁徙图数据
+		var lineArr = pointArr.map(item => {
+			return {
+				coords: [
+					item.value, center
+				],
+				lineStyle: {
+					color: '#4ab2e5'
+				}
+			}
+		})
+
+		const option = {
+			backgroundColor: '#013954',
+			geo: {
+				map: 'china',
+				aspectScale: 0.75, //长宽比
+				zoom: 1.1,
+				roam: false,
+				itemStyle: {
+					normal: {
+						areaColor: {
+							type: 'radial',
+							x: 0.5,
+							y: 0.5,
+							r: 0.8,
+							colorStops: [{
+								offset: 0,
+								color: '#09132c' // 0% 处的颜色
+							}, {
+								offset: 1,
+								color: '#274d68' // 100% 处的颜色
+							}],
+							globalCoord: true // 缺省为 false
+						},
+						shadowColor: 'rgb(58,115,192)',
+						shadowOffsetX: 10,
+						shadowOffsetY: 11
+					},
+					emphasis: {
+						areaColor: '#2AB8FF',
+						borderWidth: 0,
+						color: 'green',
+						label: {
+							show: false
+						}
+					}
+				},
+				// 此处是去掉 '海南诸岛'的阴影偏移
+				regions: [{
+					name: '南海诸岛',
+					itemStyle: {
+						areaColor: 'rgba(0, 10, 52, 1)',
+						borderColor: 'rgba(0, 10, 52, 1)',
+						normal: {
+							opacity: 0, // 透明度设置为0就看不见了
+							label: {
+								show: false,
+								color: "#009cc9",
+							}
+						}
+					},
+				}]
+			},
+			series: [{
+				type: 'map',
+				roam: false,
+				label: {
+					normal: {
+						show: true,
+						textStyle: {
+							color: '#1DE9B6'
+						}
+					},
+					emphasis: {
+						textStyle: {
+							color: 'rgb(183,185,14)'
+						}
+					}
+				},
+				itemStyle: {
+					normal: {
+						borderColor: 'rgb(147, 235, 248)',
+						borderWidth: 1,
+						// 设置区域颜色
+						areaColor: {
+							type: 'radial',
+							x: 0.5,
+							y: 0.5,
+							r: 0.8,
+							colorStops: [{
+								offset: 0,
+								color: '#09132c' // 0% 处的颜色
+							}, {
+								offset: 1,
+								color: '#274d68' // 100% 处的颜色
+							}],
+							globalCoord: true // 缺省为 false
+						},
+					},
+					emphasis: {
+						areaColor: 'rgb(46,229,206)',
+						borderWidth: 0.1
+					}
+				},
+				zoom: 1.1,
+				map: 'china' //使用
+			}, {
+				type: 'effectScatter',
+				coordinateSystem: 'geo',
+				showEffectOn: 'render',
+				zlevel: 1,
+				rippleEffect: {
+					period: 15,
+					scale: 4,
+					brushType: 'fill'
+				},
+				hoverAnimation: true,
+				label: {
+					normal: {
+						formatter: '{b}',
+						position: 'right',
+						offset: [15, 0],
+						color: '#1DE9B6',
+						show: true
+					},
+				},
+				itemStyle: {
+					normal: {
+						color: '#1DE9B6',
+						shadowBlur: 10,
+						shadowColor: '#333'
+					}
+				},
+				symbolSize: 10,
+				data: pointArr,
+				// data: points
+			}, {
+				type: 'lines',
+				zlevel: 2,
+				effect: {
+					show: true,
+					period: 4, //箭头指向速度，值越小速度越快
+					trailLength: 0.4, //特效尾迹长度[0,1]值越大，尾迹越长重
+					symbol: 'arrow', //箭头图标
+					symbolSize: 7, //图标大小
+				},
+				lineStyle: {
+					normal: {
+						color: '#1DE9B6',
+						width: 2, //线条宽度
+						opacity: 0.1, //尾迹线条透明度
+						curveness: .3 //尾迹线条曲直度
+					}
+				},
+				data: lineArr
+			}]
+		}
+		myChart.setOption(option)
+	})
+</script>
+
+</html>
