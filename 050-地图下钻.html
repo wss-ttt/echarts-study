@@ -90,12 +90,12 @@
   }
 
   // 初始化地图
-  function initChart(name, geoData, bussinessData) {
+  function initChart(name, geojson, bussinessData) {
     if (myChart) {
       myChart.dispose(); // 销毁实例 这个地方必须销毁实例,否则后面单击事件时会执行两边
     }
     myChart = echarts.init(oBox);
-    echarts.registerMap(name, geoData) //设置地图
+    echarts.registerMap(name, geojson) //设置地图
     let option = {
       // geo: {}, // geo配置可以不需要
       tooltip: {},
