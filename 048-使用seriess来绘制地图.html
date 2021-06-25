@@ -8,30 +8,57 @@
         margin: 0;
         padding: 0;
       }
-
+      body {
+        display: flex;
+      }
       #main {
         width: 500px;
         height: 500px;
         background-color: #ccc;
+      }
+      #main2 {
+        width: 500px;
+        height: 500px;
+        background-color: #bb3;
       }
     </style>
   </head>
 
   <body>
     <div id="main"></div>
+    <div id="main2"></div>
   </body>
   <script src="js/jquery.min.js"></script>
   <script src="js/echarts.min.js"></script>
   <script src="mapdata/hubei.js"></script>
   <script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('main'))
+  {
+    // 这个是使用js数据
+    let myChart = echarts.init(document.getElementById('main'))
     myChart.setOption({
       series: [
         {
           type: 'map',
-          map: '湖北'
+          // 这个地方使用mapType和map也都是可以的
+          // map: '湖北',
+          mapType: '湖北'
         }
       ]
     })
+  }
+  {
+    let myChart = echarts.init(document.getElementById('main2'))
+    $.get('./mapdata/hubei.json', function(data) {
+      echarts.registerMap('chinatest', data) //设置地图
+      myChart.setOption({
+        series: [{
+          type: 'map',
+          // 这个地方使用mapType和map都是可以的
+          // mapType: 'chinatest'
+          map: 'chinatest'
+        }]
+      })
+    })
+  }
   </script>
 </html>
