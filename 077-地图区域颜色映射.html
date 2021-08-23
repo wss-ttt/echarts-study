@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body,
+		html {
+			height: 100%;
+		}
+
+		.info {
+			position: absolute;
+			top: 40px;
+			left: 100px;
+		}
+
+		.info .box {
+			display: flex;
+			padding: 10px 0;
+		}
+
+		.info .box .icon {
+			width: 20px;
+			height: 20px;
+			border-radius: 4px;
+			margin-right: 10px;
+		}
+
+		.info .box .icon.pic1 {
+			background: #FAD8E9;
+		}
+
+		.info .box .icon.pic2 {
+			background: #E4F1D5;
+		}
+
+
+		#main {
+			width: 100%;
+			height: 100%;
+			background-color: #ccc;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="info">
+		<div class="box">
+			<div class="icon pic1"></div>
+			<div class="txt">统推</div>
+		</div>
+		<div class="box">
+			<div class="icon pic2"></div>
+			<div class="txt">储备</div>
+		</div>
+	</div>
+	<div id="main"></div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var arr1 = ['湖北', '湖南', '山东', '山西', '江苏']
+	var arr2 = ['河北', '北京', '黑龙江', '河南', '陕西', '西藏', '重庆', '蒙东']
+	var arr3 = []
+	var geoCoordMap = {};
+	let dataList = [{
+			name: "南海诸岛",
+			value: 0
+		},
+		{
+			name: '北京',
+			value: 0
+		},
+		{
+			name: '天津',
+			value: 0
+		},
+		{
+			name: '上海',
+			value: 0
+		},
+		{
+			name: '重庆',
+			value: 0
+		},
+		{
+			name: '河北',
+			value: 0
+		},
+		{
+			name: '河南',
+			value: 0
+		},
+		{
+			name: '云南',
+			value: 0
+		},
+		{
+			name: '辽宁',
+			value: 0
+		},
+		{
+			name: '黑龙江',
+			value: 0
+		},
+		{
+			name: '湖南',
+			value: 0
+		},
+		{
+			name: '安徽',
+			value: 0
+		},
+		{
+			name: '山东',
+			value: 0
+		},
+		{
+			name: '新疆',
+			value: 0
+		},
+		{
+			name: '江苏',
+			value: 0
+		},
+		{
+			name: '浙江',
+			value: 0
+		},
+		{
+			name: '江西',
+			value: 0
+		},
+		{
+			name: '湖北',
+			value: 0
+		},
+		{
+			name: '广西',
+			value: 0
+		},
+		{
+			name: '甘肃',
+			value: 0
+		},
+		{
+			name: '山西',
+			value: 0
+		},
+		{
+			name: '内蒙古',
+			value: 0
+		},
+		{
+			name: '陕西',
+			value: 0
+		},
+		{
+			name: '吉林',
+			value: 0
+		},
+		{
+			name: '福建',
+			value: 0
+		},
+		{
+			name: '贵州',
+			value: 0
+		},
+		{
+			name: '广东',
+			value: 0
+		},
+		{
+			name: '青海',
+			value: 0
+		},
+		{
+			name: '西藏',
+			value: 0
+		},
+		{
+			name: '四川',
+			value: 0
+		},
+		{
+			name: '宁夏',
+			value: 0
+		},
+		{
+			name: '海南',
+			value: 0
+		},
+		{
+			name: '台湾',
+			value: 0
+		},
+		{
+			name: '香港',
+			value: 0
+		},
+		{
+			name: '澳门',
+			value: 0
+		}
+	];
+	dataList.forEach(item => {
+		if (arr1.includes(item.name)) {
+			item.value = 1
+			arr3.push({
+				name: item.name
+			})
+		}
+		if (arr2.includes(item.name)) {
+			item.value = 2
+			arr3.push({
+				name: item.name
+			})
+		}
+
+	})
+	console.log('dataList', dataList)
+	console.log('arr3', arr3)
+
+	var myChart = echarts.init(document.getElementById('main'))
+	$.get('mapdata/china.json', function (data) {
+		// console.log(data) // 输出的是地图数据
+
+		data.features.forEach(item => {
+			if(arr1.includes(item.properties.name) || arr2.includes(item.properties.name)) {
+				// 收集经纬度信息
+				var name = item.properties.name
+				// 调整散点的经纬度位置, 避免挡住地区文字了
+				geoCoordMap[name] = [item.properties.cp[0] + 0.3, item.properties.cp[1] + 0.5]
+			}
+			if (!(arr1.includes(item.properties.name) || arr2.includes(item.properties.name))) {
+				// item.properties.name = ''
+			}
+		})
+		console.log('geoCoordMap', geoCoordMap)
+		echarts.registerMap('china', data) //设置地图
+		myChart.setOption({
+			geo: {
+				map: "china",
+				roam: !1,
+				scaleLimit: {
+					min: 1,
+					max: 2
+				},
+				zoom: 1.23,
+				top: 120,
+				label: {
+					normal: {
+						show: !0,
+						fontSize: "14",
+						color: "rgba(0,0,0,0.7)"
+					}
+				},
+				itemStyle: {
+					normal: {
+						//shadowBlur: 50,
+						//shadowColor: 'rgba(0, 0, 0, 0.2)',
+						borderColor: "rgba(0, 0, 0, 0.2)"
+					},
+					emphasis: {
+						areaColor: "#f2d5ad",
+						shadowOffsetX: 0,
+						shadowOffsetY: 0,
+						borderWidth: 0
+					}
+				}
+			},
+			visualMap: {
+				min: 0,
+				max: 1000,
+				left: 26,
+				bottom: 40,
+				showLabel: true,
+				text: ["高", "低"],
+				pieces: [{
+					// gt: 100,
+					value: 1,
+					label: '统推',
+					color: "#FAD8E9" // value = 1 的颜色
+				}, {
+					// gte: 10,
+					// lte: 100,
+					value: 2, // value = 2 的颜色
+					label: '储备',
+					color: "#E4F1D5"
+				}, {
+					value: 0,
+					color: "#fff" // 其他的颜色
+				}],
+				show: false
+			},
+			series: [{
+				name: "中国",
+				type: "map",
+				geoIndex: 0,
+				data: dataList
+			}, {
+				name: '计划单列市',
+				type: 'effectScatter', //影响散点
+				coordinateSystem: 'geo',
+				symbolSize: 8,
+				showEffectOn: 'render',
+				rippleEffect: {
+					brushType: 'stroke'
+				},
+				hoverAnimation: true,
+				itemStyle: {
+					normal: {
+						color: '#00FF00',
+						shadowBlur: 10,
+						shadowColor: '#00FF00'
+					}
+				},
+				data: convertData(arr3)
+				// 所需结构如下
+				// data: convertData([
+				// 	{
+				// 		name: '山东',
+				// 		value: 2
+				// 	}
+				// ])
+			}]
+		})
+	})
+
+	function convertData(data) {
+		var res = [];
+		for (var i = 0; i < data.length; i++) {
+			var geoCoord = geoCoordMap[data[i].name];
+			if (geoCoord) {
+				res.push({
+					name: data[i].name,
+					value: geoCoord.concat(data[i].value)
+				});
+			}
+		}
+		console.log('res', res)
+		return res;
+	}
+</script>
+
+</html>
